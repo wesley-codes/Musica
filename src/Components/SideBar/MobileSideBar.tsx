@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Modal from "../Modal/Modal";
 import RadioSVG from "../SVG/RadioSVG";
 import NavItem from "./NavItem";
@@ -17,18 +17,15 @@ import {
 } from "./SideBar.styles";
 
 const MobileSideBar = () => {
-
   return (
     <React.Fragment>
-
-    
-     <SideContainer>
+      <SideContainer animate={{ x: 0 }} initial={{ x: "-100vw" }}>
         <InnerContainer>
           <NavItem title="Home" svg={<HomeLogo />} />
 
-          <NavItem title="My collections" svg={<Playlist/>} />
+          <NavItem title="My collections" svg={<Playlist />} />
 
-          <NavItem title="Radio" svg={<RadioIcon/>} />
+          <NavItem title="Radio" svg={<RadioIcon />} />
 
           <NavItem title="Music videos" svg={<MusicVideoIcon />} />
 
@@ -37,7 +34,6 @@ const MobileSideBar = () => {
           <NavItem title="Log out" svg={<LogoutIcon />} />
         </InnerContainer>
       </SideContainer>
-     
     </React.Fragment>
   );
 };
