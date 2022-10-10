@@ -15,12 +15,17 @@ import {
   Subtitle,
   SubtitleContainer,
 } from "./SideBar.styles";
+interface MobileSideBarProps {
 
-const MobileSideBar = () => {
+  setSideBar : React.Dispatch<React.SetStateAction<boolean>>
+}
+
+
+const MobileSideBar = ({setSideBar}:MobileSideBarProps) => {
   return (
     <React.Fragment>
       <SideContainer animate={{ x: 0 }} initial={{ x: "-100vw" }}>
-        <InnerContainer>
+<InnerContainer>
           <NavItem title="Home" svg={<HomeLogo />} />
 
           <NavItem title="My collections" svg={<Playlist />} />

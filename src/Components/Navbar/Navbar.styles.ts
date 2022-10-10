@@ -9,11 +9,12 @@ export const NavbarContainer = styled.nav`
   padding: 10px 30px;
   display: flex;
   align-items: center;
-  position: sticky;
+  position: fixed;
+  z-index: 40;
   left: 78px;
   height: 3.5rem;
-
-  ${Mobile({ position: "relative", left: "0", height:"3rem" , padding:"10px 15px"})}
+width: calc(100% - 78px);
+  ${Mobile({ position: "relative", height:"3rem" , padding:"10px 0",width:"100%", left:"0" })}
 `;
 
 export const NavBox = styled.div`
@@ -49,7 +50,7 @@ export const SearchIcon = styled(SearchSVG)`
 
 export const NavContainer__Inner = styled.div`
 display: none;
-${Mobile({display: "flex", width:"100%", justifyContent:"space-between"})}
+${Mobile({display: "flex", width:"100%", justifyContent:"space-between", padding:"10px"})}
 
 `
 

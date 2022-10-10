@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {
   HambugerMenu,
   InputContainer,
@@ -17,9 +17,15 @@ interface NavBarProps {
 }
 
 
+
 const Navbar = ({setSideBar}:NavBarProps) => {
 
 
+
+const openSideBar = ()=>{
+   setSideBar(true)
+
+}
 
   return (
     <NavbarContainer>
@@ -32,7 +38,7 @@ const Navbar = ({setSideBar}:NavBarProps) => {
           }}
         >
           <LogoContainer margin>
-            <HambugerMenu  onClick={()=> setSideBar(true)} />
+            <HambugerMenu  onClick={openSideBar} />
           </LogoContainer>
           <LogoContainer>
             <Logo />

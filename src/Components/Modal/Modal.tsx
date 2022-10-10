@@ -11,7 +11,11 @@ export type ChildrenProps = {
 };
 
 const Modal = ({ children, setSideBar }: ChildrenProps) => {
-  return <BackDrop onClick={() => setSideBar(false)}>{children}</BackDrop>;
+  const closeModal = () => {
+    setSideBar(false);
+  };
+
+  return <BackDrop onClick={closeModal}>{children}</BackDrop>;
 };
 
 export default Modal;

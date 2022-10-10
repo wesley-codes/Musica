@@ -1,5 +1,6 @@
 import React from 'react'
-import { ChartContainer, HeaderContainer } from './TopChart.styles'
+import CardPLayer from '../CardPlayer/CardPLayer'
+import { CardContainer, ChartContainer, HeaderContainer } from './TopChart.styles'
 
 
 
@@ -11,6 +12,15 @@ const TopChart = () => {
         Top charts
         </h2>
     </HeaderContainer>
+    <CardContainer>
+        <CardPLayer/>
+        <CardPLayer/>
+        <CardPLayer/>
+        <CardPLayer/>
+
+        </CardContainer>
+
+       
    </ChartContainer>
   )
 }

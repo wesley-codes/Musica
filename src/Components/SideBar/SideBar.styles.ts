@@ -1,13 +1,13 @@
-import { Mobile } from './../../Utility/Responsive/Mobile';
+import { Mobile } from "./../../Utility/Responsive/Mobile";
 import styled, { css } from "styled-components";
 import HomeSVG from "../SVG/HomeSVG";
 import LogoSVG from "../SVG/logoSVG";
 import PlaylistSVG from "../SVG/PlaylistSVG";
-import RadioSVG from '../SVG/RadioSVG';
-import MusicVideoSVG from '../SVG/MusicVideoSVG';
-import ProfileSVG from '../SVG/ProfileSVG';
-import LogoutSVG from '../SVG/LogoutSVG';
-import { motion } from 'framer-motion';
+import RadioSVG from "../SVG/RadioSVG";
+import MusicVideoSVG from "../SVG/MusicVideoSVG";
+import ProfileSVG from "../SVG/ProfileSVG";
+import LogoutSVG from "../SVG/LogoutSVG";
+import { motion } from "framer-motion";
 export const SideBarContainer = styled.div`
   position: fixed;
   left: 0;
@@ -18,7 +18,7 @@ export const SideBarContainer = styled.div`
   padding: 20px 10px;
   z-index: 99;
   transition: all 0.5s ease;
-  ${Mobile({display: "none"})}
+  ${Mobile({ display: "none" })}
 `;
 
 export const LogoContainer = styled.div<any>`
@@ -57,59 +57,56 @@ export const Playlist = styled(PlaylistSVG)``;
 
 export const RadioIcon = styled(RadioSVG)``;
 
-export const MusicVideoIcon = styled(MusicVideoSVG)``
+export const MusicVideoIcon = styled(MusicVideoSVG)``;
 
 export const ProfileIcon = styled(ProfileSVG)`
-fill: rgba(239, 238, 224, 0.25);
-`
+  fill: rgba(239, 238, 224, 0.25);
+`;
 
 export const LogoutIcon = styled(LogoutSVG)`
-fill: rgba(239, 238, 224, 0.25);
-
-`
+  fill: rgba(239, 238, 224, 0.25);
+`;
 
 export const SideContainer = styled(motion.div)`
-height: 100%;
-    width: 70%;
-    position: fixed;
-    z-index: 3;
-    top: 0;
-    left: 0;
-    background: #1E1E1E; 
-       overflow-x: hidden;
-    transition: 0.35s;
-    padding-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    padding:4rem 2rem;
-
-    
-
-`
+  display: none;
+  ${Mobile({
+    height: "100%",
+    width: "70%",
+    position: "fixed",
+    zIindex: "3",
+    top: "0",
+    left: "0",
+    background: "#1E1E1E",
+    overflowX: "hidden",
+    transition: "0.35s",
+    paddingTop: "10px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "start",
+    padding: "4rem 2rem",
+  })}
+`;
 
 export const InnerContainer = styled.ul`
-padding-left: 0;
-width: 100%;
-`
+  padding-left: 0;
+  width: 100%;
+`;
 
 export const LinkItem = styled.li`
-list-style-type: none;
-display: flex;
-align-items: center;
-margin: 1.5rem 0;
-
-
-`
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+`;
 
 export const SubtitleContainer = styled.div`
-display: flex;
-align-items: center;
-margin: 0 10px ;
-`
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+`;
 
 export const Subtitle = styled.p`
-color: rgba(239, 238, 224, 0.25);
-font-weight: 700;
-font-size: 17px;
-`
+  color: rgba(239, 238, 224, 0.25);
+  font-weight: 700;
+  font-size: 17px;
+`;
