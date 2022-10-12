@@ -4,6 +4,7 @@ import styled from "styled-components";
 import "./App.css";
 import Modal from "./Components/Modal/Modal";
 import Navbar from "./Components/Navbar/Navbar";
+import Collection from "./Components/Pages/Collection";
 import HomePage from "./Components/Pages/HomePage";
 import Playlist from "./Components/Pages/Playlist";
 import Player from "./Components/Player/Player";
@@ -38,9 +39,10 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/playlist" element={<Playlist />} />
-          </Routes>
+            <Route path="/collection" element={<Collection/>} />
+                      </Routes>
         </div>
-        {/* <Player /> */}
+        <Player />
       </div>
     </div>
   );

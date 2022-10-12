@@ -1,4 +1,5 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   HambugerMenu,
   InputContainer,
@@ -12,21 +13,14 @@ import {
 } from "./Navbar.styles";
 
 interface NavBarProps {
-
-  setSideBar?: React.Dispatch<React.SetStateAction<boolean>>
-  sm? : boolean
+  setSideBar?: React.Dispatch<React.SetStateAction<boolean>>;
+  sm?: boolean;
 }
 
-
-
-const Navbar = ({setSideBar, sm}:NavBarProps) => {
-
-
-
-const openSideBar = ()=>{
-   setSideBar!(true)
-
-}
+const Navbar = ({ setSideBar, sm }: NavBarProps) => {
+  const openSideBar = () => {
+   
+  };
 
   return (
     <NavbarContainer sm={sm}>
@@ -39,10 +33,12 @@ const openSideBar = ()=>{
           }}
         >
           <LogoContainer margin>
-            <HambugerMenu  onClick={openSideBar} />
+            <HambugerMenu onClick={()=> setSideBar!(true)} />
           </LogoContainer>
           <LogoContainer>
-            <Logo />
+            <Link to="/">
+              <Logo />
+            </Link>
           </LogoContainer>
         </div>
 

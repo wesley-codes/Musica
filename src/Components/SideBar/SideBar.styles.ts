@@ -51,9 +51,16 @@ export const NavContainer = styled.div<any>`
   ${(props) => props.secondBox && css``}
 `;
 
-export const HomeLogo = styled(HomeSVG)``;
+export const HomeLogo = styled(HomeSVG)<any>`
+fill: ${props =>props.match === "/" ? "#FACD66" : "#EFEEE0;"} ;
+fill-opacity:${props =>props.match === "/" ? "" : "0.25"}  ;
 
-export const Playlist = styled(PlaylistSVG)``;
+`;
+
+export const PlaylistIcon = styled(PlaylistSVG)<any>`
+fill: ${props =>props.match === "/collection" ? "#FACD66" : "#EFEEE0"} ;
+fill-opacity:${props =>props.match === "/collection" ? "" : "0.25"}  ;
+`;
 
 export const RadioIcon = styled(RadioSVG)``;
 

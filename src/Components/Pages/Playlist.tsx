@@ -4,6 +4,7 @@ import { Mobile } from '../../Utility/Responsive/Mobile'
 import PlaylistBanner from '../PlaylistBanner/PlaylistBanner'
 import lead from "../Assets/Lead.png"
 import Navbar from '../Navbar/Navbar'
+import PlaylistCard from '../PlaylistCard/PlaylistCard'
 
 const PlaylistContainer = styled.div`
 padding: 15px;
@@ -25,13 +26,16 @@ object-fit: cover;
 
 
 const Container = styled.div`
-display: flex;
   margin-top: 5rem;
   
-  ${Mobile({ flexDirection: "column" })}
+  ${Mobile({ flexDirection: "column" , marginTop:"5rem"})}
 
 `
 
+const PlayListWrapper = styled.div`
+margin: 3rem 0;
+${Mobile({margin:"1rem 0"})}
+`
 
 
 const Playlist = () => {
@@ -40,6 +44,24 @@ const Playlist = () => {
         <Navbar sm/>
      <Container>
       <PlaylistBanner/>
+      <PlayListWrapper>
+      <PlaylistCard/>
+      <PlaylistCard/>
+      <PlaylistCard/>
+      <PlaylistCard/>
+      <PlaylistCard/>
+      <PlaylistCard/>
+      <PlaylistCard/>
+      <PlaylistCard/>
+      <PlaylistCard/>
+      <PlaylistCard/>
+      <PlaylistCard/>
+      <PlaylistCard/>
+      <PlaylistCard/>
+      <PlaylistCard/>
+      <PlaylistCard/>
+
+      </PlayListWrapper>
     </Container>
    </PlaylistContainer>
   )

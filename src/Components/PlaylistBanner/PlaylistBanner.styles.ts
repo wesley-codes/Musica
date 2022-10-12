@@ -76,7 +76,7 @@ export const PlayListButton = styled(StyledButton)<any>`
         display: flex;
       `}
   }
-//removing the p tag on samsung fold
+  //removing the p tag on samsung fold
   @media only screen and (max-width: 280px) {
     p {
       display: none;

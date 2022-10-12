@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link , useResolvedPath, useLocation, useMatch} from "react-router-dom";
 import PlaylistSVG from "../SVG/PlaylistSVG";
 import {
   HomeLogo,
@@ -8,28 +8,37 @@ import {
   LogoutIcon,
   MusicVideoIcon,
   NavContainer,
+  PlaylistIcon,
   ProfileIcon,
   RadioIcon,
   SideBarContainer,
 } from "./SideBar.styles";
 
 const SideBar = () => {
+const location = useLocation()
+let resolved = useResolvedPath(location.pathname)
+let match = useMatch({path: resolved.pathname, end: true })
+
+console.log(match)
+
   return (
     <SideBarContainer>
       <LogoContainer>
-        <Logo />
+       <Link to="/">
+       <Logo />
+       </Link>
       </LogoContainer>
 
       <NavContainer>
         <LogoContainer>
         <Link to="/">
-        <HomeLogo />
+        <HomeLogo  match={match?.pathname}/>
         </Link>
         </LogoContainer>
 
         <LogoContainer first>
-         <Link to="/playlist">
-         <PlaylistSVG />
+         <Link to="/collection">
+         <PlaylistIcon  match={match?.pathname}/>
          </Link>
         </LogoContainer>
 

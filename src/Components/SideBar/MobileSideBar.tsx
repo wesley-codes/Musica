@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import Modal from "../Modal/Modal";
 import RadioSVG from "../SVG/RadioSVG";
 import NavItem from "./NavItem";
+import { Link, useResolvedPath, useLocation, useMatch } from "react-router-dom";
+
 import {
   HomeLogo,
   InnerContainer,
   LinkItem,
   LogoutIcon,
   MusicVideoIcon,
-  Playlist,
+  PlaylistIcon,
   ProfileIcon,
   RadioIcon,
   SideContainer,
@@ -16,19 +18,29 @@ import {
   SubtitleContainer,
 } from "./SideBar.styles";
 interface MobileSideBarProps {
-
-  setSideBar : React.Dispatch<React.SetStateAction<boolean>>
+  setSideBar: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+const MobileSideBar = ({ setSideBar }: MobileSideBarProps) => {
+  const location = useLocation();
+  let resolved = useResolvedPath(location.pathname);
+  let match = useMatch({ path: resolved.pathname, end: true });
 
-const MobileSideBar = ({setSideBar}:MobileSideBarProps) => {
   return (
     <React.Fragment>
       <SideContainer animate={{ x: 0 }} initial={{ x: "-100vw" }}>
-<InnerContainer>
-          <NavItem title="Home" svg={<HomeLogo />} />
+        <InnerContainer>
+          <NavItem
+            to="/"
+            title="Home"
+            svg={<HomeLogo match={match?.pathname} />}
+          />
 
-          <NavItem title="My collections" svg={<Playlist />} />
+          <NavItem
+            to="/collection"
+            title="My collections"
+            svg={<PlaylistIcon match={match?.pathname} />}
+          />
 
           <NavItem title="Radio" svg={<RadioIcon />} />
 

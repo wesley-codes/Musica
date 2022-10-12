@@ -41,7 +41,7 @@ export const FirstContainer = styled.div`
     flex-direction: column;
     margin-left: 10px;
   }
-  ${Mobile({ flex: "1" })}
+  ${Mobile({ flex: "1", padding:"0px", justifyContent:"space-between" })}
 `;
 
 export const SecondContainer = styled.div`

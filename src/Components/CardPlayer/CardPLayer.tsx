@@ -13,6 +13,7 @@ import {
   ThummbnailContainer,
 } from "./CardPlayer.styles";
 import Image from "../Assets/Image1.png";
+import { Link } from "react-router-dom";
 const CardPLayer = () => {
   return (
     <CardPlayerContainer>
@@ -22,7 +23,11 @@ const CardPLayer = () => {
         </ThummbnailContainer>
 
         <CenterContainer>
+
+          <Link to="/playlist" style={{textDecoration:"none"}}>
           <SongName> Golden age of 80s</SongName>
+          </Link>
+         
           <ArtistName>Sean swadder</ArtistName>
 
           <SongDuration>2:34:45</SongDuration>
