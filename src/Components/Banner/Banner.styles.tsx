@@ -141,7 +141,9 @@ left: 80px;
 
 
 export const HeartIcon = styled(HeartSVG)`
-  
+  fill: #fff;
+  width: 20px;
+height:20px
 `
 
 export const Wrapper = styled.div`

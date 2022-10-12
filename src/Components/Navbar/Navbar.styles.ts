@@ -4,8 +4,11 @@ import SearchSVG from "../SVG/SearchSVG";
 import LogoSVG from "../SVG/logoSVG";
 import MenuSVG from "../SVG/MenuSVG";
 
-export const NavbarContainer = styled.nav`
-  background: #1d2123;
+{console.log()}
+
+
+export const NavbarContainer = styled.nav<any>`
+  background: ${window.location.pathname === "/playlist" ? "transparent": "#1D2123"};
   padding: 10px 30px;
   display: flex;
   align-items: center;
@@ -14,10 +17,21 @@ export const NavbarContainer = styled.nav`
   left: 78px;
   height: 3.5rem;
 width: calc(100% - 78px);
-  ${Mobile({ position: "relative", height:"3rem" , padding:"10px 0",width:"100%", left:"0" })}
+  ${Mobile({ position: "relative", height:"3rem" , padding:"10px 0",width:"100%", left:"0" })};
+
+${
+props => props.sm && css`
+
+@media only screen and (max-width: 768px) {
+      display: none;
+    }
+`
+}
+
 `;
 
 export const NavBox = styled.div`
+
   ${Mobile({ display: "none" })}
 `;
 
@@ -29,7 +43,7 @@ export const SearchInput = styled.input`
   position: relative;
   padding: 8px;
   text-align: center;
-  background: #1d2123;
+  background: transparent;
   outline: none;
   border: none;
   &::placeholder {

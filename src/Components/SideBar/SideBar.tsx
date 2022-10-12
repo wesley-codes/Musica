@@ -1,10 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PlaylistSVG from "../SVG/PlaylistSVG";
 import {
   HomeLogo,
   Logo,
   LogoContainer,
+  LogoutIcon,
+  MusicVideoIcon,
   NavContainer,
+  ProfileIcon,
+  RadioIcon,
   SideBarContainer,
 } from "./SideBar.styles";
 
@@ -17,29 +22,33 @@ const SideBar = () => {
 
       <NavContainer>
         <LogoContainer>
-          <HomeLogo />
+        <Link to="/">
+        <HomeLogo />
+        </Link>
         </LogoContainer>
 
         <LogoContainer first>
-          <PlaylistSVG />
+         <Link to="/playlist">
+         <PlaylistSVG />
+         </Link>
         </LogoContainer>
 
         <LogoContainer first>
-          <PlaylistSVG />
+          <RadioIcon />
         </LogoContainer>
 
         <LogoContainer first>
-          <PlaylistSVG />
+          <MusicVideoIcon />
         </LogoContainer>
       </NavContainer>
 
       <NavContainer secondBox>
         <LogoContainer second>
-          <PlaylistSVG />
+          <ProfileIcon />
         </LogoContainer>
 
         <LogoContainer second>
-          <PlaylistSVG />
+          <LogoutIcon />
         </LogoContainer>
       </NavContainer>
     </SideBarContainer>

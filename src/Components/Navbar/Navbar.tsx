@@ -13,22 +13,23 @@ import {
 
 interface NavBarProps {
 
-  setSideBar : React.Dispatch<React.SetStateAction<boolean>>
+  setSideBar?: React.Dispatch<React.SetStateAction<boolean>>
+  sm? : boolean
 }
 
 
 
-const Navbar = ({setSideBar}:NavBarProps) => {
+const Navbar = ({setSideBar, sm}:NavBarProps) => {
 
 
 
 const openSideBar = ()=>{
-   setSideBar(true)
+   setSideBar!(true)
 
 }
 
   return (
-    <NavbarContainer>
+    <NavbarContainer sm={sm}>
       <NavContainer__Inner>
         <div
           style={{
