@@ -5,6 +5,7 @@ import PlaylistBanner from '../PlaylistBanner/PlaylistBanner'
 import lead from "../Assets/Lead.png"
 import Navbar from '../Navbar/Navbar'
 import PlaylistCard from '../PlaylistCard/PlaylistCard'
+import AnimatedRoute from '../AnimatedRoute/AnimatedRoute'
 
 const PlaylistContainer = styled.div`
 padding: 15px;
@@ -40,7 +41,8 @@ ${Mobile({margin:"1rem 0"})}
 
 const Playlist = () => {
   return (
-      <PlaylistContainer>
+    <AnimatedRoute>
+        <PlaylistContainer>
         <Navbar sm/>
      <Container>
       <PlaylistBanner/>
@@ -64,6 +66,7 @@ const Playlist = () => {
       </PlayListWrapper>
     </Container>
    </PlaylistContainer>
+    </AnimatedRoute>
   )
 }
 

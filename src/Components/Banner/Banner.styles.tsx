@@ -88,7 +88,7 @@ export const VectorContainer = styled(motion.div)`
 
 `;
 
-export const VectorImage = styled.img`
+export const VectorImage = styled(motion.img)`
   border-radius: 40px;
 `;
 

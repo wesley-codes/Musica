@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Mobile } from "../../Utility/Responsive/Mobile";
+import AnimatedRoute from "../AnimatedRoute/AnimatedRoute";
 import CollectionButton from "../Button/CollectionButton";
 import CardCollection from "../CardCollection/CardCollection";
 import { CardBox } from "../CardCollection/CardCollection.styles";
@@ -23,7 +24,8 @@ const CardRow = styled.div`
 
 const Collection = () => {
   return (
-    <Container>
+   <AnimatedRoute>
+     <Container>
       <ButtonContainer>
         <CollectionButton>
           <p> My collection</p>
@@ -46,6 +48,7 @@ const Collection = () => {
         <CardCollection />
       </CardRow>
     </Container>
+   </AnimatedRoute>
   );
 };
 

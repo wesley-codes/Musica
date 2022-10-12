@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Mobile } from "../../Utility/Responsive/Mobile";
+import AnimatedRoute from "../AnimatedRoute/AnimatedRoute";
 import Banner from "../Banner/Banner";
 import CardPlayerMobile from "../CardPlayer/CardPayerMobile";
 import MobileTopChart from "../CardPlayer/CardPayerMobile";
@@ -22,8 +23,8 @@ padding: 15px;
 
 const HomePage = () => {
   return (
-    <React.Fragment>
-      <HompageContainer>
+    <AnimatedRoute>
+    <HompageContainer>
         <Container>
           <Banner />
           <TopChart />
@@ -32,7 +33,7 @@ const HomePage = () => {
 
         <Popular/>
       </HompageContainer>
-    </React.Fragment>
+    </AnimatedRoute>
   );
 };
 

@@ -37,7 +37,10 @@ function App() {
           )}{" "}
           <Navbar setSideBar={setActive} />
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePage />}>
+
+              
+            </Route>
             <Route path="/playlist" element={<Playlist />} />
             <Route path="/collection" element={<Collection/>} />
                       </Routes>
