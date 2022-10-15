@@ -9,7 +9,7 @@ import AnimatedRoute from '../AnimatedRoute/AnimatedRoute'
 
 const PlaylistContainer = styled.div`
 padding: 15px;
-position: absolute;
+
 top: 0;
 left: 0;
 right: 0;

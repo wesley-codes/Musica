@@ -19,7 +19,6 @@ const location = useLocation()
 let resolved = useResolvedPath(location.pathname)
 let match = useMatch({path: resolved.pathname, end: true })
 
-console.log(match)
 
   return (
     <SideBarContainer>

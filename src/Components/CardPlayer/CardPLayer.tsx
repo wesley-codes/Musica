@@ -14,12 +14,18 @@ import {
 } from "./CardPlayer.styles";
 import Image from "../Assets/Image1.png";
 import { Link } from "react-router-dom";
-const CardPLayer = () => {
+
+interface CardPlayerProp{
+  thumbnail : string
+}
+
+
+const CardPLayer = ({thumbnail}:CardPlayerProp) => {
   return (
     <CardPlayerContainer>
       <FirstContainer>
         <ThummbnailContainer>
-          <Thumbnail src={Image} />
+          <Thumbnail src={thumbnail} />
         </ThummbnailContainer>
 
         <CenterContainer>

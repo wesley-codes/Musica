@@ -19,6 +19,11 @@ const Container = styled.div`
   ${Mobile({ display: "block" })}
 `;
 
+const RouteContainer = styled.div`
+margin-bottom: 8rem;
+${Mobile({marginBottom:"3.5rem"})}
+`
+
 function App() {
   const [active, setActive] = useState(false);
 
@@ -36,14 +41,13 @@ function App() {
             </React.Fragment>
           )}{" "}
           <Navbar setSideBar={setActive} />
-          <Routes>
-            <Route path="/" element={<HomePage />}>
-
-              
-            </Route>
+         <RouteContainer>
+         <Routes>
+            <Route path="/" element={<HomePage />}></Route>
             <Route path="/playlist" element={<Playlist />} />
-            <Route path="/collection" element={<Collection/>} />
-                      </Routes>
+            <Route path="/collection" element={<Collection />} />
+          </Routes>
+         </RouteContainer>
         </div>
         <Player />
       </div>

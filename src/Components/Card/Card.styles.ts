@@ -13,6 +13,7 @@ export const CardThumbnailContainer = styled.div`
 `
 export const Thumbnail = styled.img`
 width: 150px;
+height: 150px;
 object-fit: cover;
 margin-right: 2rem;
 `

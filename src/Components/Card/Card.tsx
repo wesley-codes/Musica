@@ -17,14 +17,22 @@ import Album9 from "../Assets/Album9.png";
 import Album10 from "../Assets/Album10.png";
 import { ArtistName, SongDuration } from "../CardPlayer/CardPlayer.styles";
 
-const Card = () => {
+
+interface CardProps {
+ cover : string
+artistName : string| string[]
+songName : string 
+}
+
+
+const Card = ({cover ,artistName, songName}:CardProps) => {
   return (
     <CardContainer>
       <CardThumbnailContainer>
-        <Thumbnail src={Album1} />
+        <Thumbnail src={cover} />
       </CardThumbnailContainer>
-      <SongDuration>Life in a bubble</SongDuration>
-      <ArtistName>The van</ArtistName>
+      <SongDuration>{songName}</SongDuration>
+      <ArtistName>{artistName}</ArtistName>
     </CardContainer>
   );
 };

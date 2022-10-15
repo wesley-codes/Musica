@@ -29,7 +29,8 @@ margin-top: 20px;
 
 ${props => props.release && css`
 display: flex;
-height: 220px;
+align-items: center;
+height: unset;
 scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;
 &::-webkit-scrollbar {
@@ -37,6 +38,6 @@ scrollbar-width: none; /* Firefox */
   }
 `}
 
-${Mobile({display:"flex", alignItems:"center", height:"250px", marginTop:"0"})}
+${Mobile({display:"flex", alignItems:"center", marginTop:"0"})}
 `
 
