@@ -16,18 +16,34 @@ import Album8 from "../Assets/Album8.png";
 import Album9 from "../Assets/Album9.png";
 import Album10 from "../Assets/Album10.png";
 import { ArtistName, SongDuration } from "../CardPlayer/CardPlayer.styles";
-
-
+import {useDispatch} from "react-redux"
+import { AppDispatch } from "../../Features/Store";
+import {activeSongHandler} from "../../Features/SongSlice"
+import { Action, Hub } from "../../Types/PopularTypes";
 interface CardProps {
+  id: string
  cover : string
 artistName : string| string[]
 songName : string 
+url: string | string[] 
+
 }
 
 
-const Card = ({cover ,artistName, songName}:CardProps) => {
+const Card = ({id ,cover ,artistName, songName, url }:CardProps) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+
+
+  const setActiveSongHandler = () => {
+dispatch(activeSongHandler({id, cover, artistName , songName , url:url[1]}))
+    
+    
+    
+    }
+
   return (
-    <CardContainer>
+    <CardContainer onClick={setActiveSongHandler}>
       <CardThumbnailContainer>
         <Thumbnail src={cover} />
       </CardThumbnailContainer>

@@ -11,7 +11,11 @@ import Player from "./Components/Player/Player";
 import MobileSideBar from "./Components/SideBar/MobileSideBar";
 import SideBar from "./Components/SideBar/SideBar";
 import { Logo, LogoContainer } from "./Components/SideBar/SideBar.styles";
+import { useFetchWorldChartQuery, useFetchWorldSongsQuery } from "./Services/songApi";
 import { Mobile } from "./Utility/Responsive/Mobile";
+import {useDispatch} from "react-redux"
+import { AppDispatch } from "./Features/Store";
+import { setSongListHandler } from "./Features/SongSlice";
 const Container = styled.div`
   display: none;
   position: relative;
@@ -26,6 +30,10 @@ ${Mobile({marginBottom:"3.5rem"})}
 
 function App() {
   const [active, setActive] = useState(false);
+  //console.log(data)
+
+
+
 
   return (
     <div>

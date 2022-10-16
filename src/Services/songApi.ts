@@ -6,40 +6,36 @@ export const songApi = createApi({
   reducerPath: "songApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://shazam-core.p.rapidapi.com/v1",
+    prepareHeaders: (headers:Headers)=>{
+         headers.set("X-RapidAPI-Key", "a97adfcd2cmsha0838e3fe345da8p1cde6djsn420ea2784646");
+   return headers
+        }
   }),
   endpoints: (builder) => ({
     fetchWorldChart: builder.query<WorldChartTypes[], void>({
       query: () => ({
         url: `/charts/world`,
-        headers: {
-          "X-RapidAPI-Key":
-            "a20b85b309msh81a7aff222f08f0p1f2bfajsn0167f39864e9",
-          "X-RapidAPI-Host": "shazam-core.p.rapidapi.com",
-        },
+    
         method: "GET",
       }),
     }),
     fetchPopularByCountry: builder.query<PopularSongsType[], string>({
         query: (country) => ({
           url: `/charts/country?country_code=${country}`,
-          headers: {
-            'X-RapidAPI-Key': 'a20b85b309msh81a7aff222f08f0p1f2bfajsn0167f39864e9',
-            'X-RapidAPI-Host': 'shazam-core.p.rapidapi.com'
-          },
+         
           method: "GET",
         }),
       }),
-      fetchPopularByCountryArtist: builder.query<PopularSongsType[], string>({
-        query: (country) => ({
-          url: `/charts/country?country_code=${country}`,
-          headers: {
-            'X-RapidAPI-Key': 'a20b85b309msh81a7aff222f08f0p1f2bfajsn0167f39864e9',
-            'X-RapidAPI-Host': 'shazam-core.p.rapidapi.com'
-          },
+      fetchWorldSongs: builder.query<WorldChartTypes[], void>({
+        query: () => ({
+          url: `/charts/world`,
+      
           method: "GET",
         }),
       }),
+      
+
   }),
 });
 
-export const { useFetchWorldChartQuery, useFetchPopularByCountryQuery, useFetchPopularByCountryArtistQuery } = songApi;
+export const { useFetchWorldChartQuery, useFetchPopularByCountryQuery , useFetchWorldSongsQuery} = songApi;

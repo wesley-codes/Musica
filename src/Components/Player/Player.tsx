@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useRef} from "react";
 import {
   ArtistName,
   FirstContainer,
@@ -21,7 +21,25 @@ import {
   Wrapper,
 } from "./Player.styles";
 import Song from "../Assets/Album2.png";
+import Song1 from "../Assets/music/song1.mp3";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { RootState } from "../../Features/Store";
+
 const Player = () => {
+const audioRef = useRef<HTMLAudioElement>(null)
+//Redux Selector states
+
+const useAppSelector:TypedUseSelectorHook<RootState>= useSelector
+
+const {activeSong, songList} = useAppSelector(state => state.song)
+
+const play = () =>{
+  audioRef.current?.play()
+}
+
+console.log(songList)
+
+
   const makeLongShadow = (color: string, size: number) => {
     let i = 18;
     let shadow = `${i}px 0 0 ${size} ${color}`;
@@ -38,12 +56,12 @@ const Player = () => {
       <Wrapper>
         <FirstContainer>
           <ThumbnailContainer>
-            <Thumbnail src={Song} />
+            <Thumbnail src={activeSong.cover} />
           </ThumbnailContainer>
 
           <div>
-            <SongName>Seasons in</SongName>
-            <ArtistName> James</ArtistName>
+            <SongName>{activeSong.songName}</SongName>
+            <ArtistName> {activeSong.artistName}</ArtistName>
           </div>
         </FirstContainer>
         <SecondContainer>
@@ -57,7 +75,7 @@ const Player = () => {
             </IconBox>
 
             <IconBox play>
-              <PlayIcon />
+              <PlayIcon  onClick={play}/>
             </IconBox>
 
             <IconBox>
@@ -79,6 +97,7 @@ const Player = () => {
             <Slider type="range" volume />
           </div>
         </ThirdContainer>
+        <audio src={activeSong!?.url} controls ref={audioRef}/>
       </Wrapper>
     </PlayerContainer>
   );
