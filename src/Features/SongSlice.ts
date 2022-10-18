@@ -51,7 +51,7 @@ export const songSlice = createSlice({
       state.shuffle = true;
     },
     nextSongHandler: (state) => {
-      //if currentsong is less than  current(state.songList).length
+      //if currentsong is less than  current(state.songList).length -1
       state.currentsong++;
 
       if (state.currentsong <= current(state.songList).length - 1) {
@@ -68,17 +68,9 @@ export const songSlice = createSlice({
         };
         console.log("next song is true increase", state.currentsong);
       } else {
+        //else set the current song index back to 0 so it starts from the begining
         state.currentsong = 0;
       }
-
-      //   state.activeSong.id = state.songList[state.currentsong + 1].key;
-      //   state.activeSong.artistName =
-      //     state.songList[state.currentsong + 1]!?.artists[0].alias;
-      //   state.activeSong.cover =
-      //     state.songList[state.currentsong + 1]!?.images.coverart;
-      //   state.activeSong.songName = state.songList[state.currentsong + 1]!?.title;
-      //   state.activeSong.url =
-      //     state.songList[state.currentsong + 1].hub!?.actions[1]!?.uri!;
     },
   },
 });
