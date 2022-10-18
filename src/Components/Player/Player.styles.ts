@@ -6,6 +6,7 @@ import PreviousSVG from "../SVG/PreviousSVG";
 import PlaySVG from "../SVG/PlaySVG";
 import RepeatSVG from "../SVG/RepeatSVG";
 import VolumeSVG from "../SVG/VolumeSVG";
+import PauseSVG from "../SVG/PauseSVG";
 
 export const PlayerContainer = styled.div`
   height: 125px;
@@ -41,7 +42,7 @@ export const FirstContainer = styled.div`
     flex-direction: column;
     margin-left: 10px;
   }
-  ${Mobile({ flex: "1", padding:"0px", justifyContent:"space-between" })}
+  ${Mobile({ flex: "1", padding: "0px", justifyContent: "space-between" })}
 `;
 
 export const SecondContainer = styled.div`
@@ -231,7 +232,9 @@ export const PreviousIcon = styled(PreviousSVG)`
 
 export const PlayIcon = styled(PlaySVG)``;
 
-export const RepeatIcon = styled(RepeatSVG)`
+export const PauseIcon = styled(PauseSVG)``;
+
+export const RepeatIcon = styled(RepeatSVG)<any>`
   ${Mobile({ display: "none" })}
 `;
 

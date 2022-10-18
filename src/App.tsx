@@ -10,12 +10,15 @@ import Playlist from "./Components/Pages/Playlist";
 import Player from "./Components/Player/Player";
 import MobileSideBar from "./Components/SideBar/MobileSideBar";
 import SideBar from "./Components/SideBar/SideBar";
-import { Logo, LogoContainer } from "./Components/SideBar/SideBar.styles";
-import { useFetchWorldChartQuery, useFetchWorldSongsQuery } from "./Services/songApi";
+import {
+  useFetchWorldChartQuery,
+  useFetchWorldSongsQuery,
+} from "./Services/songApi";
 import { Mobile } from "./Utility/Responsive/Mobile";
-import {useDispatch} from "react-redux"
-import { AppDispatch } from "./Features/Store";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { RootState, AppDispatch } from "./Features/Store";
 import { setSongListHandler } from "./Features/SongSlice";
+
 const Container = styled.div`
   display: none;
   position: relative;
@@ -24,16 +27,19 @@ const Container = styled.div`
 `;
 
 const RouteContainer = styled.div`
-margin-bottom: 8rem;
-${Mobile({marginBottom:"3.5rem"})}
-`
+  margin-bottom: 8rem;
+  ${Mobile({ marginBottom: "3.5rem" })}
+`;
 
 function App() {
   const [active, setActive] = useState(false);
-  //console.log(data)
+  const dispatch = useDispatch<AppDispatch>();
 
+  const { data = [] } = useFetchWorldChartQuery()!;
 
-
+  useEffect(() => {
+    dispatch(setSongListHandler(data));
+  }, [data]);
 
   return (
     <div>
@@ -49,13 +55,13 @@ function App() {
             </React.Fragment>
           )}{" "}
           <Navbar setSideBar={setActive} />
-         <RouteContainer>
-         <Routes>
-            <Route path="/" element={<HomePage />}></Route>
-            <Route path="/playlist" element={<Playlist />} />
-            <Route path="/collection" element={<Collection />} />
-          </Routes>
-         </RouteContainer>
+          <RouteContainer>
+            <Routes>
+              <Route path="/" element={<HomePage />}></Route>
+              <Route path="/playlist" element={<Playlist />} />
+              <Route path="/collection" element={<Collection />} />
+            </Routes>
+          </RouteContainer>
         </div>
         <Player />
       </div>

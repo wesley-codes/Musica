@@ -1,10 +1,11 @@
-import React,{useRef} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ArtistName,
   FirstContainer,
   IconBox,
   IconContainer,
   NextIcon,
+  PauseIcon,
   PlayerContainer,
   PlayIcon,
   PreviousIcon,
@@ -22,23 +23,53 @@ import {
 } from "./Player.styles";
 import Song from "../Assets/Album2.png";
 import Song1 from "../Assets/music/song1.mp3";
-import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { TypedUseSelectorHook, useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../Features/Store";
+import { AppDispatch } from "../../Features/Store";
+import {
+  nextSongHandler,
+  playPauseHandler,
+  repeatHandler,
+} from "../../Features/SongSlice";
+
+type ControlTypes = {
+  playing: boolean;
+};
 
 const Player = () => {
-const audioRef = useRef<HTMLAudioElement>(null)
-//Redux Selector states
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const dispatch = useDispatch<AppDispatch>();
 
-const useAppSelector:TypedUseSelectorHook<RootState>= useSelector
+  const [player, setPlayer] = useState<ControlTypes>({
+    playing: false,
+  });
+  //Redux Selector states
 
-const {activeSong, songList} = useAppSelector(state => state.song)
+  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-const play = () =>{
-  audioRef.current?.play()
-}
+  const { activeSong, songList, playing, repeat } = useAppSelector(
+    (state) => state.song
+  );
 
-console.log(songList)
+  const onPlayPauseHandler = () => {
+    dispatch(playPauseHandler());
+  };
 
+  const nextSong = () => {
+    dispatch(nextSongHandler());
+  };
+
+  useEffect(() => {
+    if (playing) {
+      audioRef.current?.play();
+    } else {
+      audioRef.current?.pause();
+    }
+  }, [playing, activeSong]);
+
+  const onRepeatHandler = () => {
+    dispatch(repeatHandler());
+  };
 
   const makeLongShadow = (color: string, size: number) => {
     let i = 18;
@@ -74,16 +105,20 @@ console.log(songList)
               <PreviousIcon />
             </IconBox>
 
-            <IconBox play>
-              <PlayIcon  onClick={play}/>
+            <IconBox play onClick={onPlayPauseHandler}>
+              {playing ? <PauseIcon /> : <PlayIcon />}
             </IconBox>
 
-            <IconBox>
+            <IconBox onClick={nextSong}>
               <NextIcon />
             </IconBox>
 
-            <IconBox>
-              <RepeatIcon />
+            <IconBox onClick={onRepeatHandler}>
+              {repeat ? (
+                <RepeatIcon fill="#FACD66" />
+              ) : (
+                <RepeatIcon fill="#fff" />
+              )}
             </IconBox>
           </IconContainer>
 
@@ -97,7 +132,7 @@ console.log(songList)
             <Slider type="range" volume />
           </div>
         </ThirdContainer>
-        <audio src={activeSong!?.url} controls ref={audioRef}/>
+        <audio src={activeSong.url} ref={audioRef} loop={repeat} />
       </Wrapper>
     </PlayerContainer>
   );

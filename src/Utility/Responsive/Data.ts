@@ -1,14 +1,6 @@
 import React from "react"
+import { SongDataTypes } from "../../Types/LocalDataTypes"
 
-type SongDataTypes ={
-id: number,
-SongName: string
-artistName: string
-duration: string
-cover: string
-audio: string
-
-}
 
 
 
