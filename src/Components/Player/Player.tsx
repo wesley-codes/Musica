@@ -29,6 +29,7 @@ import { AppDispatch } from "../../Features/Store";
 import {
   nextSongHandler,
   playPauseHandler,
+  prevSongHandler,
   repeatHandler,
 } from "../../Features/SongSlice";
 
@@ -57,6 +58,10 @@ const Player = () => {
 
   const nextSong = () => {
     dispatch(nextSongHandler());
+  };
+
+  const prevSong = () => {
+    dispatch(prevSongHandler());
   };
 
   useEffect(() => {
@@ -101,7 +106,7 @@ const Player = () => {
               <ShuffleIcon />
             </IconBox>
 
-            <IconBox>
+            <IconBox onClick={prevSong}>
               <PreviousIcon />
             </IconBox>
 

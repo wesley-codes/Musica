@@ -28,8 +28,9 @@ export const songSlice = createSlice({
       { payload }: PayloadAction<WorldChartTypes[]>
     ) => {
       state.songList = payload;
-      console.log("data from newReleased", state.songList);
+      //console.log("data from newReleased", state.songList);
       //setting inital active song
+
       state.activeSong.id = state.songList[0]?.key;
       state.activeSong.artistName = state.songList[0]?.artists[0]?.alias;
       state.activeSong.cover = state.songList[0]?.images.coverart;
@@ -39,6 +40,16 @@ export const songSlice = createSlice({
     activeSongHandler: (state, { payload }) => {
       state.activeSong = payload;
       state.playing = true;
+
+      //active song id
+      let activeSongId = state.activeSong.id as unknown as any;
+
+      //setting the currentsong index to the index of the activesong
+
+      state.currentsong = current(state.songList)
+        .map((i) => i.key)
+        .indexOf(activeSongId);
+
       // console.log("active song playing ", state.playing);
     },
     playPauseHandler: (state) => {
@@ -51,9 +62,9 @@ export const songSlice = createSlice({
       state.shuffle = true;
     },
     nextSongHandler: (state) => {
-      //if currentsong is less than  current(state.songList).length -1
-      state.currentsong++;
+      state.currentsong++; //increasing current song by 1
 
+      //if currentsong is less than  current(state.songList).length -1
       if (state.currentsong <= current(state.songList).length - 1) {
         state.activeSong = {
           id: current(state.songList)[state.currentsong].key,
@@ -66,9 +77,26 @@ export const songSlice = createSlice({
 
           songName: current(state.songList)[state.currentsong]!?.title,
         };
-        console.log("next song is true increase", state.currentsong);
       } else {
-        //else set the current song index back to 0 so it starts from the begining
+        state.currentsong = 0;
+      }
+    },
+    prevSongHandler: (state) => {
+      state.currentsong--;
+
+      if (state.currentsong >= 0) {
+        state.activeSong = {
+          id: current(state.songList)[state.currentsong].key,
+          cover: current(state.songList)[state.currentsong]!?.images.coverart,
+          artistName: current(state.songList)[state.currentsong]!?.artists[0]
+            .alias,
+
+          url: current(state.songList)[state.currentsong].hub!?.actions[1]!
+            ?.uri!,
+
+          songName: current(state.songList)[state.currentsong]!?.title,
+        };
+      } else {
         state.currentsong = 0;
       }
     },
@@ -81,6 +109,7 @@ export const {
   playPauseHandler,
   repeatHandler,
   nextSongHandler,
+  prevSongHandler,
 } = songSlice.actions;
 export default songSlice;
 

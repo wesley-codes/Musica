@@ -9,7 +9,7 @@ export const songApi = createApi({
     prepareHeaders: (headers: Headers) => {
       headers.set(
         "X-RapidAPI-Key",
-        "3545ac079bmsh3d174fc135aed63p17c249jsnb4ffc44c3f32"
+        "7f9463425cmsh4781bfd89f18494p16c11ejsn5c446d36269b"
       );
       return headers;
     },

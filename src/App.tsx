@@ -35,11 +35,11 @@ function App() {
   const [active, setActive] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
 
-  const { data = [] } = useFetchWorldChartQuery()!;
+  const { data: worldChart = [] } = useFetchWorldChartQuery()!;
 
   useEffect(() => {
-    dispatch(setSongListHandler(data));
-  }, [data]);
+    dispatch(setSongListHandler(worldChart));
+  }, [worldChart]);
 
   return (
     <div>
