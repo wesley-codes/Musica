@@ -31,8 +31,6 @@ import D from "../Assets/Avatar4.png";
 import E from "../Assets/Avatar5.png";
 
 const Banner = () => {
-
-  
   return (
     <BannerContainer>
       <MobileVector src={Mobilevector} />
@@ -74,9 +72,7 @@ const Banner = () => {
 
       <ArtContainer>
         <VectorContainer>
-          <VectorImage src={Vector} 
-
-/>
+          <VectorImage src={Vector} />
         </VectorContainer>
 
         <ImageContainer>

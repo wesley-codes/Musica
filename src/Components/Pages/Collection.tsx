@@ -24,31 +24,31 @@ const CardRow = styled.div`
 
 const Collection = () => {
   return (
-   <AnimatedRoute>
-     <Container>
-      <ButtonContainer>
-        <CollectionButton>
-          <p> My collection</p>
-        </CollectionButton>
+    <AnimatedRoute>
+      <Container>
+        <ButtonContainer>
+          <CollectionButton>
+            <p> My collection</p>
+          </CollectionButton>
 
-        <CollectionButton likes>
-          <p> Likes</p>
-        </CollectionButton>
-      </ButtonContainer>
+          <CollectionButton likes>
+            <p> Likes</p>
+          </CollectionButton>
+        </ButtonContainer>
 
-      <CardRow>
-        <CardCollection />
-        <CardCollection />
-        <CardCollection />
-        <CardCollection />
-        <CardCollection />
-        <CardCollection />
-        <CardCollection />
-        <CardCollection />
-        <CardCollection />
-      </CardRow>
-    </Container>
-   </AnimatedRoute>
+        <CardRow>
+          <CardCollection />
+          <CardCollection />
+          <CardCollection />
+          <CardCollection />
+          <CardCollection />
+          <CardCollection />
+          <CardCollection />
+          <CardCollection />
+          <CardCollection />
+        </CardRow>
+      </Container>
+    </AnimatedRoute>
   );
 };
 

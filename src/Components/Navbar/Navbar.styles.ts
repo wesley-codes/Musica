@@ -18,7 +18,7 @@ export const NavbarContainer = styled.nav<any>`
   position: fixed;
   z-index: 40;
   left: 78px;
-  top:0;
+  top: 0;
   height: 3.5rem;
   width: calc(100% - 78px);
 

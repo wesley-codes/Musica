@@ -18,9 +18,7 @@ interface NavBarProps {
 }
 
 const Navbar = ({ setSideBar, sm }: NavBarProps) => {
-  const openSideBar = () => {
-   
-  };
+  const openSideBar = () => {};
 
   return (
     <NavbarContainer sm={sm}>
@@ -33,7 +31,7 @@ const Navbar = ({ setSideBar, sm }: NavBarProps) => {
           }}
         >
           <LogoContainer margin>
-            <HambugerMenu onClick={()=> setSideBar!(true)} />
+            <HambugerMenu onClick={() => setSideBar!(true)} />
           </LogoContainer>
           <LogoContainer>
             <Link to="/">

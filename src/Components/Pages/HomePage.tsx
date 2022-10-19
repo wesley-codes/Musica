@@ -18,20 +18,20 @@ const Container = styled.div`
 `;
 
 const HompageContainer = styled.div`
-padding: 15px;
-`
+  padding: 15px;
+`;
 
 const HomePage = () => {
   return (
     <AnimatedRoute>
-    <HompageContainer>
+      <HompageContainer>
         <Container>
           <Banner />
           <TopChart />
         </Container>
         <NewRelease />
 
-        <Popular/>
+        <Popular />
       </HompageContainer>
     </AnimatedRoute>
   );

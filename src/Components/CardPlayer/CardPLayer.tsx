@@ -15,12 +15,11 @@ import {
 import Image from "../Assets/Image1.png";
 import { Link } from "react-router-dom";
 
-interface CardPlayerProp{
-  thumbnail : string
+interface CardPlayerProp {
+  thumbnail: string;
 }
 
-
-const CardPLayer = ({thumbnail}:CardPlayerProp) => {
+const CardPLayer = ({ thumbnail }: CardPlayerProp) => {
   return (
     <CardPlayerContainer>
       <FirstContainer>
@@ -29,11 +28,10 @@ const CardPLayer = ({thumbnail}:CardPlayerProp) => {
         </ThummbnailContainer>
 
         <CenterContainer>
-
-          <Link to="/playlist" style={{textDecoration:"none"}}>
-          <SongName> Golden age of 80s</SongName>
+          <Link to="/playlist" style={{ textDecoration: "none" }}>
+            <SongName> Golden age of 80s</SongName>
           </Link>
-         
+
           <ArtistName>Sean swadder</ArtistName>
 
           <SongDuration>2:34:45</SongDuration>

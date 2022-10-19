@@ -10,25 +10,20 @@ import {
 interface NavItemProps {
   title: string;
   svg: JSX.Element;
-  to?:string
+  to?: string;
 }
 
 const NavItem = ({ title, svg, to }: NavItemProps) => {
-
-
-
-  
   return (
     <React.Fragment>
-     <Link to={to!} style={{textDecoration:"none"}}>
-     
-     <LinkItem>
-        {svg}
-        <SubtitleContainer>
-          <Subtitle> {title}</Subtitle>
-        </SubtitleContainer>
-      </LinkItem>
-     </Link>
+      <Link to={to!} style={{ textDecoration: "none" }}>
+        <LinkItem>
+          {svg}
+          <SubtitleContainer>
+            <Subtitle> {title}</Subtitle>
+          </SubtitleContainer>
+        </LinkItem>
+      </Link>
     </React.Fragment>
   );
 };

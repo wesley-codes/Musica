@@ -11,7 +11,6 @@ import { CardContainer, HeaderContainer } from "../TopChart/TopChart.styles";
 import { NewReleaseContainer } from "./NewRelease.styles";
 
 const NewRelease = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const { data = [] } = useFetchWorldChartQuery();
 
   return (
@@ -24,8 +23,8 @@ const NewRelease = () => {
           <Card
             key={item.key}
             id={item.key}
-            cover={item.images.coverart}
-            artistName={item.artists[0].alias}
+            cover={item.images!?.coverart}
+            artistName={item.artists!?.map((item) => item.alias!)}
             songName={item.title}
             url={item.hub.actions!?.map((item) => item.uri!)}
           />
