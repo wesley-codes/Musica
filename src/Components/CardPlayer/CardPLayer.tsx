@@ -14,25 +14,31 @@ import {
 } from "./CardPlayer.styles";
 import Image from "../Assets/Image1.png";
 import { Link } from "react-router-dom";
+import { CardPlayerProp, PlaylistType } from "../../Types/LocalDataTypes";
 
-interface CardPlayerProp {
-  thumbnail: string;
-}
 
-const CardPLayer = ({ thumbnail }: CardPlayerProp) => {
+
+const CardPLayer = ({ cover, id, title, files }: CardPlayerProp) => {
+  const data: CardPlayerProp = {
+    id,
+    cover,
+    title,
+    files,
+  };
+
   return (
     <CardPlayerContainer>
       <FirstContainer>
         <ThummbnailContainer>
-          <Thumbnail src={thumbnail} />
+          <Thumbnail src={cover } />
         </ThummbnailContainer>
 
         <CenterContainer>
-          <Link to="/playlist" style={{ textDecoration: "none" }}>
-            <SongName> Golden age of 80s</SongName>
+          <Link to={`/playlist/${id}`} state={data} style={{ textDecoration: "none" }}>
+            <SongName> {id}</SongName>
           </Link>
 
-          <ArtistName>Sean swadder</ArtistName>
+          <ArtistName>{title}</ArtistName>
 
           <SongDuration>2:34:45</SongDuration>
         </CenterContainer>

@@ -7,10 +7,10 @@ export const songApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://shazam-core.p.rapidapi.com/v1",
     prepareHeaders: (headers: Headers) => {
-      headers.set(
-        "X-RapidAPI-Key",
-        "7f9463425cmsh4781bfd89f18494p16c11ejsn5c446d36269b"
-      );
+      // headers.set(
+      //   "X-RapidAPI-Key",
+      //   "7f9463425cmsh4781bfd89f18494p16c11ejsn5c446d36269b"
+      // );
       return headers;
     },
   }),

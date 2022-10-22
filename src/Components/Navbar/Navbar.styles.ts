@@ -4,14 +4,12 @@ import SearchSVG from "../SVG/SearchSVG";
 import LogoSVG from "../SVG/logoSVG";
 import MenuSVG from "../SVG/MenuSVG";
 
-{
-  console.log();
-}
+
 
 export const NavbarContainer = styled.nav<any>`
-  background: ${window.location.pathname === "/playlist"
+  /* background: ${window.location.pathname === "/playlist"
     ? "transparent"
-    : "#1D2123"};
+    : "#1D2123"}; */
   padding: 10px 30px;
   display: flex;
   align-items: center;
@@ -33,6 +31,7 @@ export const NavbarContainer = styled.nav<any>`
   ${(props) =>
     props.sm &&
     css`
+    background-color: transparent;
       @media only screen and (max-width: 768px) {
         display: none;
       }

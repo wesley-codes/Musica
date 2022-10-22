@@ -37,6 +37,7 @@ export const ThumbnailContainer = styled.div<any>`
 export const Thumbnail = styled.img`
   width: 50px;
   height: 50px;
+  border-radius: 1rem;
 `;
 
 export const IconContainer = styled.div`
@@ -54,11 +55,10 @@ export const HeartIcon = styled(HeartSVG)`
 export const DetailIcon = styled(DetailSVG)``;
 
 export const SecondContainer = styled.div`
-  flex: 3;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-
+width: 20%;
   ${Mobile({
     flexDirection: "column",
     textAlign: "start",
@@ -67,11 +67,13 @@ export const SecondContainer = styled.div`
   })}
 `;
 
+export const SongTypeBox = styled.div``
+
 export const ThirdContainer = styled.div`
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 20%;
 
   ${Mobile({
     flexDirection: "column-reverse",

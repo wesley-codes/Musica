@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Mobile } from "../../Utility/Responsive/Mobile";
 import PlaylistBanner from "../PlaylistBanner/PlaylistBanner";
@@ -6,8 +6,14 @@ import lead from "../Assets/Lead.png";
 import Navbar from "../Navbar/Navbar";
 import PlaylistCard from "../PlaylistCard/PlaylistCard";
 import AnimatedRoute from "../AnimatedRoute/AnimatedRoute";
+import { useParams, useLocation } from "react-router-dom";
+import { useFetchAlbumIDQuery } from "../../Services/AlbumApi";
+import { CardPlayerProp } from "../../Types/LocalDataTypes";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../Features/Store";
+import { setAlbumHandler } from "../../Features/SongSlice";
 
-const PlaylistContainer = styled.div`
+const PlaylistContainer = styled.div<any>`
   padding: 15px;
 
   top: 0;
@@ -16,8 +22,10 @@ const PlaylistContainer = styled.div`
   bottom: 0;
   z-index: 90;
   min-height: 95vh;
-  background: linear-gradient(180deg, rgba(29, 33, 35, 0.7) 0%, #1d2123 61.48%),
-    url(${lead});
+  background: ${({
+    cover,
+  }) => `linear-gradient(180deg, rgba(29, 33, 35, 0.7) 0%, #1d2123 61.48%),
+    url(${cover})`};
   background-size: cover;
   background-position: center;
   object-fit: cover;
@@ -38,28 +46,32 @@ const PlayListWrapper = styled.div`
 `;
 
 const Playlist = () => {
+  const location = useLocation();
+  const { cover, files, title } = location.state as CardPlayerProp;
+  const dispatch = useDispatch<AppDispatch>();
+
+  //console.log(cover, files );
+
+  useEffect(() => {
+    dispatch(setAlbumHandler(files!));
+  }, [files]);
+
   return (
     <AnimatedRoute>
-      <PlaylistContainer>
+      <PlaylistContainer cover={cover}>
         <Navbar sm />
         <Container>
-          <PlaylistBanner />
+          <PlaylistBanner cover={cover} title={title} />
           <PlayListWrapper>
-            <PlaylistCard />
-            <PlaylistCard />
-            <PlaylistCard />
-            <PlaylistCard />
-            <PlaylistCard />
-            <PlaylistCard />
-            <PlaylistCard />
-            <PlaylistCard />
-            <PlaylistCard />
-            <PlaylistCard />
-            <PlaylistCard />
-            <PlaylistCard />
-            <PlaylistCard />
-            <PlaylistCard />
-            <PlaylistCard />
+            {files?.map((item) => (
+              <PlaylistCard
+                key={item.audio}
+                title={item.title}
+                cover={item.cover}
+                url={item.audio}
+                banner={cover}
+              />
+            ))}
           </PlayListWrapper>
         </Container>
       </PlaylistContainer>

@@ -87,88 +87,123 @@ export const SliderContainer = styled.div`
 // excess height to improve interactive area / accessibility
 const height = "4px";
 const thumbHeight = 15;
-const trackHeight = "4px";
 
-// colours
-const upperColor = "#2A2A2C";
-const lowerColor = "#FACD66";
-const thumbColor = "#FACD66";
-const upperBackground = `linear-gradient(to bottom, ${upperColor}, ${upperColor}) 100% 50% / 100% ${trackHeight} no-repeat transparent`;
-const lowerBackground = `linear-gradient(to bottom, ${lowerColor}, ${lowerColor}) 100% 50% / 100% ${trackHeight} no-repeat transparent`;
 
 export const Slider = styled.input<any>`
+
+
+${
+  css`
+  
   width: 100%;
   -webkit-appearance: none; /* Override default CSS styles */
+  --seek-before-width: 0;
+  --seek-before-color: red;
+  --knobby: #3452a5;
+  --selectedKnobby: #26c9c3;
+  --bar-bg: grey;
+  outline: none;
   background: transparent;
+  `
+};
 
+//for safari and browser
+&::before{
+  content: '';
+  height: ${height};
+  width: var(--seek-before-width);
+  background-color: var(--seek-before-color);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+ 
+//safari browser
   &::-webkit-slider-runnable-track {
     width: 100%;
     height: ${height};
-    background: ${lowerBackground};
-  }
+    background: var(--bar-bg)
+  };
 
   &::-webkit-slider-thumb {
+    -webkit-appearance: none;
     position: relative;
     appearance: none;
-    height: ${thumbHeight}px;
-    width: ${thumbHeight}px;
-    background: ${thumbColor};
+    height: 15px;
+    width: 15px;
+    background-color: var(--knobby);
     border-radius: 100%;
-    border: 0;
+    border: none;
     top: 50%;
+cursor: pointer; 
+z-index:3;
+box-sizing:border-box;
     transform: translateY(-50%);
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.92);
     transition: background-color 150ms;
+  };
 
-    ${(props) =>
-      props.volume &&
-      css`
-        display: none;
-      `}
-  }
+  //active thumb slider chrome and safari
+&:active::-webkit-slider-thumb{
 
+  background-color: var(--selectedKnobby);
+}
+
+  //firefox browser
   &::-moz-range-track,
   &::-moz-range-progress {
     width: 100%;
     height: ${height};
-    background: ${upperBackground};
-  }
+    background: var(--bar-bg);
+  };
 
   &::-moz-range-progress {
-    background: ${lowerBackground};
-  }
-
-  &::-moz-range-thumb {
-    appearance: none;
-    margin: 0;
-    height: ${thumbHeight};
-    width: ${thumbHeight};
-    background: ${thumbColor};
-    border-radius: 100%;
-    border: 0;
-    transition: background-color 150ms;
-  }
-
-  &::-ms-track {
-    width: 100%;
     height: ${height};
-    border: 0;
-    /* color needed to hide track marks */
+    background-color: var(--seek-before-color);
+    border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  };
+
+
+  &::-moz-range-thumb{
+    position: relative;
+    appearance: none;
+    height: 15px;
+    width: 15px;
+    background-color: var(--knobby);
+    border-radius: 100%;
+    border: none;
+    top: 50%;
+    cursor: pointer; 
+    z-index:3;
+    box-sizing:border-box;
+    transform: translateY(-50%);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.92);
+    transition: background-color 150ms;
+  };
+
+  &:active::-moz-range-thumb{
+    background-color: var(--selectedKnobby);
+
   }
 
-  &::-ms-fill-lower {
-    background: ${lowerBackground};
-  }
+&::-moz-focus-outer{
+  border: 0
+};
 
-  &::-ms-fill-upper {
-    background: ${upperBackground};
-  }
+  
+  
 
   &::-ms-thumb {
     appearance: none;
     height: ${thumbHeight};
     width: ${thumbHeight};
-    background: ${thumbColor};
+    background: var(--bar-bg);
     border-radius: 100%;
     border: 0;
     transition: background-color 150ms;
@@ -182,7 +217,7 @@ export const Slider = styled.input<any>`
     top: 0;
     margin: 0;
     box-shadow: none;
-  }
+  };
 
   ${Mobile({ display: "none" })}
 `;

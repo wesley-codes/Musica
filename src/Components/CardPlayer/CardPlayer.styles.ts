@@ -30,6 +30,7 @@ export const Thumbnail = styled.img`
   object-fit: cover;
   width: 70px;
   height: 70px;
+  border-radius: 1rem;
 `;
 
 export const CenterContainer = styled.div`

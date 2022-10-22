@@ -6,17 +6,37 @@ import {
   HeartIcon,
   IconContainer,
   SecondContainer,
+  SongTypeBox,
   ThirdContainer,
   Thumbnail,
   ThumbnailContainer,
 } from "./PlaylistCard.styles";
 import Album8 from "../Assets/Album8.png";
-const PlaylistCard = () => {
+
+interface PlaylistCardProps {
+  title: string;
+  cover: string;
+  url: string;
+  banner?: string;
+}
+
+const PlaylistCard = ({ title, cover, url, banner }: PlaylistCardProps) => {
+  const selectSongHandler = () => {
+    const data = {
+      title,
+      cover,
+      url,
+      banner,
+    };
+
+    console.log("heres the data", data)
+  };
+
   return (
-    <CardContainer>
+    <CardContainer onClick={selectSongHandler}>
       <Container>
         <ThumbnailContainer>
-          <Thumbnail src={Album8} />
+          <Thumbnail src={cover || banner} />
         </ThumbnailContainer>
         <IconContainer>
           <HeartIcon />
@@ -24,10 +44,12 @@ const PlaylistCard = () => {
       </Container>
 
       <SecondContainer>
-        <p>Let me love you ~ Krisx</p>
-
-        <p>Single</p>
+        <p>{title}</p>
       </SecondContainer>
+
+      <SongTypeBox>
+        <p>Single</p>
+      </SongTypeBox>
 
       <ThirdContainer>
         <p>4:17</p>

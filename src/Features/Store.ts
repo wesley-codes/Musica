@@ -12,6 +12,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import { albumApi } from "../Services/AlbumApi";
 const persistConfig = {
   //configuring storage engine
   key: "root",
@@ -20,6 +21,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   [songApi.reducerPath]: songApi.reducer,
+  [albumApi.reducerPath]: albumApi.reducer,
   [songSlice.name]: songSlice.reducer,
 });
 
@@ -34,7 +36,9 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(songApi.middleware),
+    })
+      .concat(songApi.middleware)
+      .concat(albumApi.middleware),
 });
 
 export const persistor = persistStore(store);

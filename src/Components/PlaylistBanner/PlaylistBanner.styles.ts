@@ -21,6 +21,9 @@ export const ImageContainer = styled.div`
 
 export const Image = styled.img`
   object-fit: cover;
+  width: 250px;
+  height: 100%;
+  border-radius: 2rem;
   ${Mobile({ width: "100%" })}
 `;
 
