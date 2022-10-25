@@ -23,7 +23,7 @@ export type PlaylistType = {
 
 
 export interface CardPlayerProp {
-  id: string;
+  id: number;
   cover: string;
   title: string;
   files?: PlaylistType[];
@@ -31,8 +31,14 @@ export interface CardPlayerProp {
 
 
 export type AlbumType = {
-  id: string;
+  id: number;
   title: string;
   cover: string;
   files : PlaylistType[]
 };
+
+export type CollectionType = {
+  id: number
+  title: string;
+  cover: string;
+}

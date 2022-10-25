@@ -12,6 +12,9 @@ import {
   ThumbnailContainer,
 } from "./PlaylistCard.styles";
 import Album8 from "../Assets/Album8.png";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../Features/Store";
+import { activeSongHandler } from "../../Features/SongSlice";
 
 interface PlaylistCardProps {
   title: string;
@@ -21,6 +24,9 @@ interface PlaylistCardProps {
 }
 
 const PlaylistCard = ({ title, cover, url, banner }: PlaylistCardProps) => {
+
+const dispatch = useDispatch<AppDispatch>()
+
   const selectSongHandler = () => {
     const data = {
       title,
@@ -28,8 +34,7 @@ const PlaylistCard = ({ title, cover, url, banner }: PlaylistCardProps) => {
       url,
       banner,
     };
-
-    console.log("heres the data", data)
+dispatch(activeSongHandler(data))
   };
 
   return (

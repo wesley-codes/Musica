@@ -31,12 +31,12 @@ const RouteContainer = styled.div`
   ${Mobile({ marginBottom: "3.5rem" })}
 `;
 
+
 function App() {
   const [active, setActive] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
 
   const { data = [] } = useFetchWorldChartQuery();
-
   useEffect(() => {
     dispatch(setSongListHandler(data!));
   }, [data]);

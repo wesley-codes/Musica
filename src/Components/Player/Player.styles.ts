@@ -239,6 +239,7 @@ export const ThumbnailContainer = styled.div``;
 export const Thumbnail = styled.img`
   width: 60px;
   height: 60px;
+  border-radius: 1rem;
 `;
 
 export const SongName = styled.p`

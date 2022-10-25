@@ -24,6 +24,7 @@ import {
 import Mobilevector from "../Assets/Mobilevector.png";
 import Vector from "../Assets/Vector.png";
 import Guyman from "../Assets/Guyman.png";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import A from "../Assets/Avatar1.png";
 import B from "../Assets/Avatar2.png";
 import C from "../Assets/Avatar3.png";

@@ -47,7 +47,7 @@ const PlayListWrapper = styled.div`
 
 const Playlist = () => {
   const location = useLocation();
-  const { cover, files, title } = location.state as CardPlayerProp;
+  const { cover, files, title, id } = location.state as CardPlayerProp;
   const dispatch = useDispatch<AppDispatch>();
 
   //console.log(cover, files );
@@ -61,7 +61,7 @@ const Playlist = () => {
       <PlaylistContainer cover={cover}>
         <Navbar sm />
         <Container>
-          <PlaylistBanner cover={cover} title={title} />
+          <PlaylistBanner cover={cover} title={title} files={files} id={id}/>
           <PlayListWrapper>
             {files?.map((item) => (
               <PlaylistCard

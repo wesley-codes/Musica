@@ -5,7 +5,12 @@ export const CardBox = styled.div`
   margin-right: 15px;
 `;
 
-export const AlbumCover = styled.img``;
+export const AlbumCover = styled.img`
+width: 150px;
+height: 150px;
+object-fit: cover;
+border-radius: 1rem;
+`;
 
 export const Container = styled.div`
   bottom: 10px;

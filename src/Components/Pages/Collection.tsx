@@ -1,5 +1,7 @@
 import React from "react";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
 import styled from "styled-components";
+import { RootState } from "../../Features/Store";
 import { Mobile } from "../../Utility/Responsive/Mobile";
 import AnimatedRoute from "../AnimatedRoute/AnimatedRoute";
 import CollectionButton from "../Button/CollectionButton";
@@ -23,6 +25,10 @@ const CardRow = styled.div`
 `;
 
 const Collection = () => {
+  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+  const { collection } = useAppSelector((state) => state.song);
+
   return (
     <AnimatedRoute>
       <Container>
@@ -36,17 +42,7 @@ const Collection = () => {
           </CollectionButton>
         </ButtonContainer>
 
-        <CardRow>
-          <CardCollection />
-          <CardCollection />
-          <CardCollection />
-          <CardCollection />
-          <CardCollection />
-          <CardCollection />
-          <CardCollection />
-          <CardCollection />
-          <CardCollection />
-        </CardRow>
+        <CardRow>{collection.map(item => <CardCollection cover={item.cover} title={item.title} /> )}</CardRow>
       </Container>
     </AnimatedRoute>
   );

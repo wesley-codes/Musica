@@ -92,7 +92,7 @@ const Player = () => {
   };
 
   const changeRange = (e: any) => {
-  console.log((audioRef.current!.duration / 100) * e.target.value)
+  console.log((audioRef.current!.duration  / 100) * e.target.value)
   audioRef.current!.currentTime = (audioRef.current!.duration / 100) * e.target.value;
   setPercentage(e.target.value);
 
@@ -113,7 +113,8 @@ const Player = () => {
 };
 
   return (
-    <PlayerContainer>
+<React.Fragment>
+      <PlayerContainer>
       <Wrapper>
         <FirstContainer>
           <ThumbnailContainer>
@@ -168,6 +169,7 @@ const Player = () => {
         </ThirdContainer>
         <audio
           src={activeSong.url}
+      // src={Song1}
           ref={audioRef}
           loop={repeat}
           onEnded={songEndHandler}
@@ -180,6 +182,7 @@ const Player = () => {
         />
       </Wrapper>
     </PlayerContainer>
+</React.Fragment>
   );
 };
 

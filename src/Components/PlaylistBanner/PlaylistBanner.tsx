@@ -15,29 +15,32 @@ import lead from "../Assets/Lead.png";
 import PlayAllSVG from "../SVG/PlayAllSVG";
 import { TypedUseSelectorHook, useDispatch , useSelector} from "react-redux";
 import { AppDispatch, RootState } from "../../Features/Store";
-import { playAll } from "../../Features/SongSlice";
+import { addToCollection, playAll } from "../../Features/SongSlice";
 import { PauseIcon } from "../Player/Player.styles";
+import { PlaylistType } from "../../Types/LocalDataTypes";
 
 export type PlaylistBannerProps = {
-  children?:
-    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-    | React.ReactNodeArray
-    | React.ReactPortal;
+id:number
 
     cover : string
     title : string
+    
+    files ?: PlaylistType[]
 };
 
-const PlaylistBanner = ({ children, cover, title }: PlaylistBannerProps) => {
+const PlaylistBanner = ({id , cover, title , files }: PlaylistBannerProps) => {
 
   const dispatch = useDispatch<AppDispatch>();
 //Redux state
-  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-const {playAll:playAllState} = useAppSelector(state => state.song)
 
 const playAllHandler = () => {
   //playall album handler
 dispatch(playAll())
+}
+
+
+const addToCollectionHandler = () =>{
+dispatch(addToCollection({id, cover, title}))
 
 }
 
@@ -60,11 +63,11 @@ dispatch(playAll())
 
         <ButtonContainer>
           <PlayListButton onClick={playAllHandler}>
-         { playAllState ? <PauseIcon fill="#FACD66"/>  :<PlayAllIcon />}
+        <PlayAllIcon />
             <p>Play all </p>
           </PlayListButton>
 
-          <PlayListButton>
+          <PlayListButton onClick={addToCollectionHandler}>
             <CollectionIcon />
             <p> Add to collection</p>
           </PlayListButton>

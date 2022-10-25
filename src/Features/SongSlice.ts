@@ -1,7 +1,7 @@
 import { WorldChartTypes } from "./../Types/WorldChartTypes";
 import { createSlice, PayloadAction, current } from "@reduxjs/toolkit";
 import { Action, Hub } from "../Types/PopularTypes";
-import { AlbumType, PlaylistType } from "../Types/LocalDataTypes";
+import { AlbumType, CollectionType, PlaylistType } from "../Types/LocalDataTypes";
 
 type activeSongTypes = {
   id: string;
@@ -16,6 +16,7 @@ const initialState = {
   activeSong: {} as unknown as activeSongTypes,
   worldChartList: [] as unknown as WorldChartTypes[],
   albumChartList: [] as unknown as PlaylistType[],
+  collection: [] as unknown as CollectionType[],
   repeat: false,
   shuffle: false,
   playing: false,
@@ -56,28 +57,27 @@ export const songSlice = createSlice({
           songName: current(state.albumChartList)[0].title,
           url: current(state.albumChartList)[0].audio,
         };
-
-        // if(state.songEnded){
-        //   state.currentsong++; //increasing current song by 1
-        //     state.activeSong = {
-        //       id: current(state.albumChartList)[state.currentsong].id,
-        //       cover: current(state.albumChartList)[state.currentsong]!?.cover,
-        //       artistName: current(state.albumChartList)[state.currentsong].artist,
-
-        //       url: current(state.albumChartList)[state.currentsong].audio,
-
-        //       songName: current(state.albumChartList)[state.currentsong]!?.title,
-        //     };
-         
-
-        // }
       }
 
       //state.activeSong
     },
 
     onSongEnded: (state, { payload }: PayloadAction<boolean>) => {
-      console.log("....paylood song ended", payload);
+      //plays immediately active song ends
+
+      state.currentsong++; //increasing current song by 1
+      state.activeSong = {
+        id: current(state.worldChartList)[state.currentsong].key,
+        cover: current(state.worldChartList)[state.currentsong]!?.images
+          ?.coverart!,
+        artistName: current(state.worldChartList)[state.currentsong]
+          ?.artists![0].alias!,
+
+        url: current(state.worldChartList)[state.currentsong].hub!.actions![1]!
+          ?.uri!,
+
+        songName: current(state.worldChartList)[state.currentsong]!?.title,
+      };
     },
     activeSongHandler: (state, { payload }) => {
       state.activeSong = payload;
@@ -91,6 +91,7 @@ export const songSlice = createSlice({
       state.currentsong = current(state.worldChartList)
         .map((i) => i.key)
         .indexOf(activeSongId);
+      console.log(state.currentsong);
     },
     playPauseHandler: (state) => {
       state.playing = !state.playing;
@@ -101,6 +102,7 @@ export const songSlice = createSlice({
     shuffleHandler: (state) => {
       state.shuffle = !state.shuffle; //toggle shuffle
     },
+
     nextSongHandler: (state) => {
       if (state.shuffle) {
         //if shuffle === true; set currentSong to a random number
@@ -109,7 +111,7 @@ export const songSlice = createSlice({
         );
       }
 
-      state.currentsong++; //increasing current song by 1
+      state.currentsong++; //increasing current song by
 
       //if currentsong is less than  current(state.songList).length -1
       if (state.currentsong <= current(state.worldChartList).length - 1) {
@@ -129,6 +131,7 @@ export const songSlice = createSlice({
         state.currentsong = 0;
       }
     },
+
     prevSongHandler: (state) => {
       if (state.shuffle) {
         //if shuffle === true; set currentSong to a random number
@@ -156,6 +159,21 @@ export const songSlice = createSlice({
         state.currentsong = 0;
       }
     },
+
+    addToCollection: (state, { payload }) => {
+     // console.log(payload.id)
+
+
+
+const checkIdExist =current(state.collection).indexOf(payload.id)
+console.log(checkIdExist)
+if (checkIdExist === -1){
+ state.collection.push(payload)
+}
+
+console.log(current(state.collection))
+
+    },
   },
 });
 
@@ -170,6 +188,7 @@ export const {
   setAlbumHandler,
   playAll,
   onSongEnded,
+  addToCollection,
 } = songSlice.actions;
 export default songSlice;
 
