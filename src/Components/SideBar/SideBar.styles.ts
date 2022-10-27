@@ -57,8 +57,8 @@ export const HomeLogo = styled(HomeSVG)<any>`
 `;
 
 export const PlaylistIcon = styled(PlaylistSVG)<any>`
-  fill: ${(props) => (props.match === "/collection" ? "#FACD66" : "#EFEEE0")};
-  fill-opacity: ${(props) => (props.match === "/collection" ? "" : "0.25")};
+  fill: ${(props) => (props.match === "/collection"  ? "#FACD66" : "#EFEEE0")};
+  fill-opacity: ${(props) => (props.match === "/collection"  ? "" : "0.25")};
 `;
 
 export const RadioIcon = styled(RadioSVG)``;

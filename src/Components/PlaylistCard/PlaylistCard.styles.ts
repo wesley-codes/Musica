@@ -32,12 +32,16 @@ export const Container = styled.div`
 
 export const ThumbnailContainer = styled.div<any>`
   position: relative;
+  ${Mobile({width:"100%"})}
 `;
 
 export const Thumbnail = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 1rem;
+  
+  ${Mobile({width:"100%"})}
+
 `;
 
 export const IconContainer = styled.div`

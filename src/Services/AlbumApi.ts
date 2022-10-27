@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AlbumType, PlaylistType } from "../Types/LocalDataTypes";
+import { AlbumType, NewSongType } from "../Types/LocalDataTypes";
 
 
 
@@ -14,13 +14,20 @@ export const albumApi = createApi({
         method: "GET",
       }),
     }),
-    fetchAlbumID: builder.query<PlaylistType[], string>({
-      query: (id) => ({
-        url: `/${id}`,
+    fetchNewSongs: builder.query<NewSongType[], void>({
+      query: () => ({
+        url: "/new",
+        method: "GET",
+      }),
+    }),
+
+    fetchPopularSongs: builder.query<NewSongType[], void>({
+      query: () => ({
+        url: "/new",
         method: "GET",
       }),
     }),
   }),
 });
 
-export const { useFetchAlbumQuery, useFetchAlbumIDQuery } = albumApi;
+export const { useFetchAlbumQuery , useFetchNewSongsQuery} = albumApi;

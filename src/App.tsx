@@ -18,6 +18,8 @@ import { Mobile } from "./Utility/Responsive/Mobile";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "./Features/Store";
 import { setSongListHandler } from "./Features/SongSlice";
+import CollectionAbulm from "./Components/Pages/CollectionAlbum/CollectionAbulm";
+import LikesCollection from "./Components/Pages/CollectionAlbum/LikesCollection";
 
 const Container = styled.div`
   display: none;
@@ -59,7 +61,9 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />}></Route>
               <Route path="/playlist/:id" element={<Playlist />} />
-              <Route path="/collection" element={<Collection />} />
+              <Route path="/collection" element={<Collection />}/>
+              <Route path="/collection-likes" element={<LikesCollection/>}/>
+
             </Routes>
           </RouteContainer>
         </div>

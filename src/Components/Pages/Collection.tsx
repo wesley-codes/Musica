@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { RootState } from "../../Features/Store";
 import { Mobile } from "../../Utility/Responsive/Mobile";
@@ -7,6 +8,10 @@ import AnimatedRoute from "../AnimatedRoute/AnimatedRoute";
 import CollectionButton from "../Button/CollectionButton";
 import CardCollection from "../CardCollection/CardCollection";
 import { CardBox } from "../CardCollection/CardCollection.styles";
+import Tab from "../Tab/Tab";
+import Tabs from "../Tab/Tabs";
+import CollectionAbulm from "./CollectionAlbum/CollectionAbulm";
+import LikesCollection from "./CollectionAlbum/LikesCollection";
 
 const Container = styled.div`
   margin-top: 5rem;
@@ -16,33 +21,20 @@ const Container = styled.div`
 
 const ButtonContainer = styled.div``;
 
-const CardRow = styled.div`
-  margin-top: 2rem;
-  display: flex;
-  overflow-x: auto;
-
-  ${Mobile({ marginTop: "1rem" })}
-`;
-
 const Collection = () => {
-  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-
-  const { collection } = useAppSelector((state) => state.song);
+  
 
   return (
     <AnimatedRoute>
       <Container>
-        <ButtonContainer>
-          <CollectionButton>
-            <p> My collection</p>
-          </CollectionButton>
-
-          <CollectionButton likes>
-            <p> Likes</p>
-          </CollectionButton>
-        </ButtonContainer>
-
-        <CardRow>{collection.map(item => <CardCollection cover={item.cover} title={item.title} /> )}</CardRow>
+        <Tabs>
+          <Tab title="My Collection">
+            <CollectionAbulm />
+          </Tab>
+          <Tab title="Likes" >
+            <LikesCollection />
+          </Tab>
+        </Tabs>
       </Container>
     </AnimatedRoute>
   );

@@ -47,7 +47,7 @@ const Player = () => {
   //Redux Selector states
 
   const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-  const [duration, setDuration] = useState(0);
+  const [duration, setDuration] = useState(1);
     const [currentTime, setCurrentTime] = useState();
     const [percentage, setPercentage] = useState<Number>(0);
 
@@ -110,6 +110,14 @@ const Player = () => {
     //console.log(time)
      setPercentage(+percent);
    setCurrentTime(time.toFixed(2));
+
+
+   const fillLeft = "#FACD66";
+   const fillRight = "rgba(255, 255, 255, 0.04)"
+
+
+   sliderRef.current!.style.background = `linear-gradient(to right, ${fillLeft} ${percent}%, ${fillRight} ${percent}%`;
+
 };
 
   return (
@@ -164,7 +172,7 @@ const Player = () => {
         <ThirdContainer>
           <div>
             <VolumeIcon />
-            <Slider type="range" volume ref={sliderRef} />
+            <input type="range"  />
           </div>
         </ThirdContainer>
         <audio

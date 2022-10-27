@@ -91,49 +91,39 @@ const thumbHeight = 15;
 
 export const Slider = styled.input<any>`
 
-
 ${
   css`
   
   width: 100%;
   -webkit-appearance: none; /* Override default CSS styles */
   --seek-before-width: 0;
-  --seek-before-color: red;
-  --knobby: #3452a5;
-  --selectedKnobby: #26c9c3;
+  --seek-before-color: #FACD66;
+  --knobby: #FACD66;
+  --selectedKnobby: #FACD66;
   --bar-bg: grey;
   outline: none;
-  background: transparent;
+border-radius: 2rem;
+background: rgba(255, 255, 255, 0.04);
+
   `
 };
 
 //for safari and browser
-&::before{
-  content: '';
-  height: ${height};
-  width: var(--seek-before-width);
-  background-color: var(--seek-before-color);
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  cursor: pointer;
-}
+
 
  
 //safari browser
   &::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+
     width: 100%;
     height: ${height};
-    background: var(--bar-bg)
+    background: rgba(255, 255, 255, 0.04);
   };
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     position: relative;
-    appearance: none;
     height: 15px;
     width: 15px;
     background-color: var(--knobby);
@@ -144,19 +134,14 @@ cursor: pointer;
 z-index:3;
 box-sizing:border-box;
     transform: translateY(-50%);
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.92);
+    box-shadow: #FACD66;
     transition: background-color 150ms;
   };
 
-  //active thumb slider chrome and safari
-&:active::-webkit-slider-thumb{
 
-  background-color: var(--selectedKnobby);
-}
 
   //firefox browser
-  &::-moz-range-track,
-  &::-moz-range-progress {
+  &::-moz-range-track{
     width: 100%;
     height: ${height};
     background: var(--bar-bg);
@@ -187,10 +172,7 @@ box-sizing:border-box;
     transition: background-color 150ms;
   };
 
-  &:active::-moz-range-thumb{
-    background-color: var(--selectedKnobby);
-
-  }
+ 
 
 &::-moz-focus-outer{
   border: 0
@@ -218,6 +200,12 @@ box-sizing:border-box;
     margin: 0;
     box-shadow: none;
   };
+
+
+
+
+
+
 
   ${Mobile({ display: "none" })}
 `;

@@ -7,10 +7,15 @@ export type ButtonProps = {
     | React.ReactNodeArray
     | React.ReactPortal;
   likes?: boolean;
+  onClick :() => void
+  selectedTab : number
+  isActive : boolean
 };
 
-const CollectionButton = ({ children, likes }: ButtonProps) => {
-  return <CollectionBtn likes={+likes!}>{children}</CollectionBtn>;
+const CollectionButton = ({ children, likes, onClick , selectedTab, isActive}: ButtonProps) => {
+  return <CollectionBtn onClick={onClick} likes={+likes!} active={isActive} >{children}</CollectionBtn>;
 };
 
 export default CollectionButton;
+
+

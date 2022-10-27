@@ -1,17 +1,13 @@
 import React, { useEffect } from "react";
-import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
-import { setSongListHandler } from "../../Features/SongSlice";
-import { AppDispatch, RootState } from "../../Features/Store";
-import {
-  useFetchWorldChartQuery,
-  useFetchWorldSongsQuery,
-} from "../../Services/songApi";
+
+import { useFetchNewSongsQuery } from "../../Services/AlbumApi";
+
 import Card from "../Card/Card";
 import { CardContainer, HeaderContainer } from "../TopChart/TopChart.styles";
 import { NewReleaseContainer } from "./NewRelease.styles";
 
 const NewRelease = () => {
-  const { data = [] } = useFetchWorldChartQuery();
+  const { data = [] } = useFetchNewSongsQuery();
 
   return (
     <NewReleaseContainer>
@@ -21,12 +17,12 @@ const NewRelease = () => {
       <CardContainer release>
         {data?.map((item) => (
           <Card
-            key={item.key}
-            id={item.key}
-            cover={item.images!?.coverart}
-            artistName={item.artists!?.map((item) => item.alias!)}
+            key={item.id}
+            id={item.id}
+            cover={item.cover}
+            artistName={item.artist}
             songName={item.title}
-            url={item.hub.actions!?.map((item) => item.uri!)}
+            url={item.audio}
           />
         ))}
       </CardContainer>

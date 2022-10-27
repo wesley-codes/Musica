@@ -37,6 +37,17 @@ export type AlbumType = {
   files : PlaylistType[]
 };
 
+
+export type NewSongType ={
+  id: string;
+  title: string;
+  cover: string;
+  duration: string
+  audio: string
+  artist: string
+}
+
+
 export type CollectionType = {
   id: number
   title: string;

@@ -163,15 +163,20 @@ export const songSlice = createSlice({
     addToCollection: (state, { payload }) => {
      // console.log(payload.id)
 
+const filteredCollection =  current(state.collection).filter(item =>{
+return item.id === payload.id
+})
 
+console.log(filteredCollection)
 
-const checkIdExist =current(state.collection).indexOf(payload.id)
-console.log(checkIdExist)
-if (checkIdExist === -1){
- state.collection.push(payload)
+if (filteredCollection.length === 1){
+  return console.log("item exist")
 }
+state.collection.push(payload)
 
-console.log(current(state.collection))
+
+
+//console.log(current(state.collection))
 
     },
   },
