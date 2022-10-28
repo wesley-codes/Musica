@@ -1,11 +1,12 @@
 import React from "react";
+import { useFetchPopularSongsQuery } from "../../Services/AlbumApi";
 import { useFetchPopularByCountryQuery } from "../../Services/songApi";
 import Card from "../Card/Card";
 import { CardContainer, HeaderContainer } from "../TopChart/TopChart.styles";
 import { PopularContainer } from "./Popular.styles";
 
 const Popular = () => {
-  const { data } = useFetchPopularByCountryQuery("NG");
+  const { data } = useFetchPopularSongsQuery();
 
   return (
     <PopularContainer>
@@ -15,12 +16,12 @@ const Popular = () => {
       <CardContainer release>
         {data?.map((item) => (
           <Card
-            key={item.key}
-            id={item.key}
-            cover={item.images!?.coverart}
+            key={item.id}
+            id={item.id}
+            cover={item.cover}
             songName={item.title}
-            artistName={item.artists!?.map((item) => item.alias)}
-            url={item.hub.actions!?.map((item) => item.uri!)}
+            artistName={item.artist}
+            url={item.audio}
           />
         ))}
       </CardContainer>

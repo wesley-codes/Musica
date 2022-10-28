@@ -23,11 +23,11 @@ export const albumApi = createApi({
 
     fetchPopularSongs: builder.query<NewSongType[], void>({
       query: () => ({
-        url: "/new",
+        url: "/popular",
         method: "GET",
       }),
     }),
   }),
 });
 
-export const { useFetchAlbumQuery , useFetchNewSongsQuery} = albumApi;
+export const { useFetchAlbumQuery , useFetchNewSongsQuery, useFetchPopularSongsQuery} = albumApi;

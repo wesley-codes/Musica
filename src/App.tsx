@@ -10,16 +10,13 @@ import Playlist from "./Components/Pages/Playlist";
 import Player from "./Components/Player/Player";
 import MobileSideBar from "./Components/SideBar/MobileSideBar";
 import SideBar from "./Components/SideBar/SideBar";
-import {
-  useFetchWorldChartQuery,
-  useFetchWorldSongsQuery,
-} from "./Services/songApi";
+
 import { Mobile } from "./Utility/Responsive/Mobile";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "./Features/Store";
+import {  useDispatch} from "react-redux";
+import { AppDispatch } from "./Features/Store";
 import { setSongListHandler } from "./Features/SongSlice";
-import CollectionAbulm from "./Components/Pages/CollectionAlbum/CollectionAbulm";
 import LikesCollection from "./Components/Pages/CollectionAlbum/LikesCollection";
+import { useFetchNewSongsQuery, useFetchPopularSongsQuery } from "./Services/AlbumApi";
 
 const Container = styled.div`
   display: none;
@@ -38,10 +35,13 @@ function App() {
   const [active, setActive] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
 
-  const { data = [] } = useFetchWorldChartQuery();
+  const { data:newSongs = [] } = useFetchNewSongsQuery();
+  const { data:popularSongs = [] } = useFetchPopularSongsQuery();
+const arr3 = newSongs!.concat(popularSongs!)
   useEffect(() => {
-    dispatch(setSongListHandler(data!));
-  }, [data]);
+    dispatch(setSongListHandler(arr3!));
+
+  }, [arr3!]);
 
   return (
     <div>

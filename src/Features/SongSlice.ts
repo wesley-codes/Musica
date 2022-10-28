@@ -1,7 +1,12 @@
 import { WorldChartTypes } from "./../Types/WorldChartTypes";
 import { createSlice, PayloadAction, current } from "@reduxjs/toolkit";
 import { Action, Hub } from "../Types/PopularTypes";
-import { AlbumType, CollectionType, PlaylistType } from "../Types/LocalDataTypes";
+import {
+  AlbumType,
+  CollectionType,
+  PlaylistType,
+  NewSongType,
+} from "../Types/LocalDataTypes";
 
 type activeSongTypes = {
   id: string;
@@ -17,6 +22,7 @@ const initialState = {
   worldChartList: [] as unknown as WorldChartTypes[],
   albumChartList: [] as unknown as PlaylistType[],
   collection: [] as unknown as CollectionType[],
+  joinedArray: [] as unknown as PlaylistType[],
   repeat: false,
   shuffle: false,
   playing: false,
@@ -30,18 +36,20 @@ export const songSlice = createSlice({
   reducers: {
     setSongListHandler: (
       state,
-      { payload }: PayloadAction<WorldChartTypes[]>
+      { payload }: PayloadAction<NewSongType[]>
     ) => {
-      state.worldChartList = payload;
-      //console.log("data from newReleased", state.worldChartList);
-      //setting inital active song
+        state.joinedArray =[... payload]
+       
 
-      state.activeSong.id = state.worldChartList[0]?.key;
-      state.activeSong.artistName =
-        state?.worldChartList[0]?.artists![0]?.alias!;
-      state.activeSong.cover = state?.worldChartList[0]?.images?.coverart!;
-      state.activeSong.songName = state.worldChartList[0]?.title;
-      state.activeSong.url = state.worldChartList[0]?.hub?.actions![0]!?.uri!;
+
+
+state.activeSong.id = state?.joinedArray[0]?.id;
+state.activeSong.artistName = state.joinedArray[0]?.artist;
+state.activeSong.cover = state.joinedArray[0]?.cover!;
+state.activeSong.songName = state.joinedArray[0]?.title!;
+state.activeSong.url =  state.joinedArray[0]?.audio!;
+
+
     },
 
     setAlbumHandler: (state, { payload }: PayloadAction<PlaylistType[]>) => {
@@ -63,21 +71,37 @@ export const songSlice = createSlice({
     },
 
     onSongEnded: (state, { payload }: PayloadAction<boolean>) => {
+
+console.log(!state.songEnded)
+
+if(!state.songEnded){
+  state.currentsong++; //increasing current song by
+
+
+  state.activeSong ={
+    id : current(state.joinedArray)[state.currentsong].id,
+    cover: current(state.joinedArray)[state.currentsong].cover,
+    artistName:current(state.joinedArray)[state.currentsong].artist,
+    songName: current(state.joinedArray)[state.currentsong].title,
+    url: current(state.joinedArray)[state.currentsong].audio
+  }
+}
+
       //plays immediately active song ends
 
-      state.currentsong++; //increasing current song by 1
-      state.activeSong = {
-        id: current(state.worldChartList)[state.currentsong].key,
-        cover: current(state.worldChartList)[state.currentsong]!?.images
-          ?.coverart!,
-        artistName: current(state.worldChartList)[state.currentsong]
-          ?.artists![0].alias!,
+      // state.currentsong++; //increasing current song by 1
+      // state.activeSong = {
+      //   id: current(state.worldChartList)[state.currentsong].key,
+      //   cover: current(state.worldChartList)[state.currentsong]!?.images
+      //     ?.coverart!,
+      //   artistName: current(state.worldChartList)[state.currentsong]
+      //     ?.artists![0].alias!,
 
-        url: current(state.worldChartList)[state.currentsong].hub!.actions![1]!
-          ?.uri!,
+      //   url: current(state.worldChartList)[state.currentsong].hub!.actions![1]!
+      //     ?.uri!,
 
-        songName: current(state.worldChartList)[state.currentsong]!?.title,
-      };
+      //   songName: current(state.worldChartList)[state.currentsong]!?.title,
+      // };
     },
     activeSongHandler: (state, { payload }) => {
       state.activeSong = payload;
@@ -107,26 +131,25 @@ export const songSlice = createSlice({
       if (state.shuffle) {
         //if shuffle === true; set currentSong to a random number
         state.currentsong = Math.round(
-          Math.random() * current(state.worldChartList).length
+          Math.random() * current(state.joinedArray).length
         );
       }
 
       state.currentsong++; //increasing current song by
 
+      console.log(current(state.activeSong))
       //if currentsong is less than  current(state.songList).length -1
-      if (state.currentsong <= current(state.worldChartList).length - 1) {
-        state.activeSong = {
-          id: current(state.worldChartList)[state.currentsong].key,
-          cover: current(state.worldChartList)[state.currentsong]!?.images
-            ?.coverart!,
-          artistName: current(state.worldChartList)[state.currentsong]
-            ?.artists![0].alias!,
+      if (state.currentsong <= current(state.joinedArray).length - 1) {
 
-          url: current(state.worldChartList)[state.currentsong].hub!
-            .actions![1]!?.uri!,
+        state.activeSong ={
+          id : current(state.joinedArray)[state.currentsong].id,
+          cover: current(state.joinedArray)[state.currentsong].cover,
+          artistName:current(state.joinedArray)[state.currentsong].artist,
+          songName: current(state.joinedArray)[state.currentsong].title,
+          url: current(state.joinedArray)[state.currentsong].audio
+        }
 
-          songName: current(state.worldChartList)[state.currentsong]!?.title,
-        };
+
       } else {
         state.currentsong = 0;
       }
@@ -136,48 +159,41 @@ export const songSlice = createSlice({
       if (state.shuffle) {
         //if shuffle === true; set currentSong to a random number
         state.currentsong = Math.round(
-          Math.random() * current(state.worldChartList).length
+          Math.random() * current(state.joinedArray).length
         );
         console.log("prev", state.currentsong);
       }
       state.currentsong--;
 
       if (state.currentsong >= 0) {
-        state.activeSong = {
-          id: current(state.worldChartList)[state.currentsong].key,
-          cover: current(state.worldChartList)[state.currentsong]?.images
-            ?.coverart!,
-          artistName: current(state.worldChartList)[state.currentsong]
-            ?.artists![0].alias!,
+        state.activeSong ={
+          id : current(state.joinedArray)[state.currentsong].id,
+          cover: current(state.joinedArray)[state.currentsong].cover,
+          artistName:current(state.joinedArray)[state.currentsong].artist,
+          songName: current(state.joinedArray)[state.currentsong].title,
+          url: current(state.joinedArray)[state.currentsong].audio
+        }
 
-          url: current(state.worldChartList)[state.currentsong].hub!
-            ?.actions![1]!.uri!,
-
-          songName: current(state.worldChartList)[state.currentsong]!?.title,
-        };
       } else {
         state.currentsong = 0;
       }
     },
 
     addToCollection: (state, { payload }) => {
-     // console.log(payload.id)
+      // console.log(payload.id)
 
-const filteredCollection =  current(state.collection).filter(item =>{
-return item.id === payload.id
-})
+      const filteredCollection = current(state.collection).filter((item) => {
+        return item.id === payload.id;
+      });
 
-console.log(filteredCollection)
+      console.log(filteredCollection);
 
-if (filteredCollection.length === 1){
-  return console.log("item exist")
-}
-state.collection.push(payload)
+      if (filteredCollection.length === 1) {
+        return console.log("item exist");
+      }
+      state.collection.push(payload);
 
-
-
-//console.log(current(state.collection))
-
+      //console.log(current(state.collection))
     },
   },
 });

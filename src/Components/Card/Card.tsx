@@ -32,17 +32,8 @@ const Card = ({ id, cover, artistName, songName, url }: CardProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const setActiveSongHandler = () => {
-    dispatch(
-      activeSongHandler({
-        id: id!,
-        cover: cover!,
-        artistName: artistName!,
-        songName,
-        url: url[1]!,
-      })
-    );
+    dispatch(activeSongHandler({ id, cover, url, artistName, songName }));
   };
-
   return (
     <CardContainer onClick={setActiveSongHandler}>
       <CardThumbnailContainer>
