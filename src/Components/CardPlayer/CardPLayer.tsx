@@ -13,7 +13,7 @@ import {
   ThummbnailContainer,
 } from "./CardPlayer.styles";
 import Image from "../Assets/Image1.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CardPlayerProp, PlaylistType } from "../../Types/LocalDataTypes";
 
 
@@ -23,20 +23,24 @@ const CardPLayer = ({ cover, id, title, files }: CardPlayerProp) => {
     id,
     cover,
     title,
-    files,
+    files
   };
 
+  const navigate = useNavigate()
+
+
+  const moveToplaylist = ()=>{
+    navigate(`/playlist/${id}`, {state : data})
+  }
   return (
-    <CardPlayerContainer>
+    <CardPlayerContainer onClick={moveToplaylist}>
       <FirstContainer>
         <ThummbnailContainer>
           <Thumbnail src={cover } />
         </ThummbnailContainer>
 
         <CenterContainer>
-          <Link to={`/playlist/${id}`} state={data} style={{ textDecoration: "none" }}>
             <SongName> {id}</SongName>
-          </Link>
 
           <ArtistName>{title}</ArtistName>
 

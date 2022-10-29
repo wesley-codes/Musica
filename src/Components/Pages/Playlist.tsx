@@ -10,7 +10,7 @@ import { useParams, useLocation } from "react-router-dom";
 import { CardPlayerProp } from "../../Types/LocalDataTypes";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../Features/Store";
-import { setAlbumHandler } from "../../Features/SongSlice";
+import {  setAlbumHandler } from "../../Features/SongSlice";
 
 const PlaylistContainer = styled.div<any>`
   padding: 15px;
@@ -46,7 +46,7 @@ const PlayListWrapper = styled.div`
 
 const Playlist = () => {
   const location = useLocation();
-  const { cover, files, title, id } = location.state as CardPlayerProp;
+  const { cover, files=[], title, id } = location.state as CardPlayerProp;
   const dispatch = useDispatch<AppDispatch>();
 
   //console.log(cover, files );
@@ -64,7 +64,7 @@ const Playlist = () => {
           <PlayListWrapper>
             {files?.map((item) => (
               <PlaylistCard
-                key={item.audio}
+                key={item.id}
                 id={item.id}
                 artistName ={item.artist}
                 songName={item.title}

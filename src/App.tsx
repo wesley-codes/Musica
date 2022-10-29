@@ -12,11 +12,15 @@ import MobileSideBar from "./Components/SideBar/MobileSideBar";
 import SideBar from "./Components/SideBar/SideBar";
 
 import { Mobile } from "./Utility/Responsive/Mobile";
-import {  useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { AppDispatch } from "./Features/Store";
 import { setSongListHandler } from "./Features/SongSlice";
 import LikesCollection from "./Components/Pages/CollectionAlbum/LikesCollection";
-import { useFetchAlbumQuery, useFetchNewSongsQuery, useFetchPopularSongsQuery } from "./Services/AlbumApi";
+import {
+  useFetchAlbumQuery,
+  useFetchNewSongsQuery,
+  useFetchPopularSongsQuery,
+} from "./Services/AlbumApi";
 
 const Container = styled.div`
   display: none;
@@ -30,18 +34,16 @@ const RouteContainer = styled.div`
   ${Mobile({ marginBottom: "3.5rem" })}
 `;
 
-
 function App() {
   const [active, setActive] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
 
-  const { data:newSongs = [] } = useFetchNewSongsQuery();
-  const { data:popularSongs = [] } = useFetchPopularSongsQuery();
+  const { data: newSongs = [] } = useFetchNewSongsQuery();
+  const { data: popularSongs = [] } = useFetchPopularSongsQuery();
 
-const arr3 = newSongs!.concat(popularSongs!)
+  const arr3 = newSongs!.concat(popularSongs!);
   useEffect(() => {
     dispatch(setSongListHandler(arr3!));
-
   }, [arr3!]);
 
   return (
@@ -62,9 +64,8 @@ const arr3 = newSongs!.concat(popularSongs!)
             <Routes>
               <Route path="/" element={<HomePage />}></Route>
               <Route path="/playlist/:id" element={<Playlist />} />
-              <Route path="/collection" element={<Collection />}/>
-              <Route path="/collection-likes" element={<LikesCollection/>}/>
-
+              <Route path="/collection" element={<Collection />} />
+              <Route path="/collection-likes" element={<LikesCollection />} />
             </Routes>
           </RouteContainer>
         </div>

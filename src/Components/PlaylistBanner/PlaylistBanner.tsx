@@ -54,7 +54,7 @@ const PlaylistBanner = ({ id, cover, title, files }: PlaylistBannerProps) => {
   };
 
   const addToCollectionHandler = () => {
-    dispatch(addToCollection({ id, cover, title }));
+    dispatch(addToCollection({ id, cover, title, files }));
   };
 
   return (

@@ -23,9 +23,9 @@ const TopChart = () => {
         {data?.map((item) => (
           <CardPLayer
           key={item.id}
+          id={item.id}
             cover={item.cover}
             title={item.title}
-            id={item.id}
             files={item.files}
           />
         ))}
