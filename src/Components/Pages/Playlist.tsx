@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Mobile } from "../../Utility/Responsive/Mobile";
 import PlaylistBanner from "../PlaylistBanner/PlaylistBanner";
+import lead from "../Assets/Lead.png";
 import Navbar from "../Navbar/Navbar";
 import PlaylistCard from "../PlaylistCard/PlaylistCard";
 import AnimatedRoute from "../AnimatedRoute/AnimatedRoute";
-import {  useLocation } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { CardPlayerProp } from "../../Types/LocalDataTypes";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../Features/Store";
@@ -64,10 +65,13 @@ const Playlist = () => {
             {files?.map((item) => (
               <PlaylistCard
                 key={item.audio}
-                title={item.title}
+                id={item.id}
+                artistName ={item.artist}
+                songName={item.title}
                 cover={item.cover}
                 url={item.audio}
                 banner={cover}
+                duration ={item.duration}
               />
             ))}
           </PlayListWrapper>

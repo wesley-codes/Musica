@@ -16,7 +16,7 @@ import {  useDispatch} from "react-redux";
 import { AppDispatch } from "./Features/Store";
 import { setSongListHandler } from "./Features/SongSlice";
 import LikesCollection from "./Components/Pages/CollectionAlbum/LikesCollection";
-import { useFetchNewSongsQuery, useFetchPopularSongsQuery } from "./Services/AlbumApi";
+import { useFetchAlbumQuery, useFetchNewSongsQuery, useFetchPopularSongsQuery } from "./Services/AlbumApi";
 
 const Container = styled.div`
   display: none;
@@ -37,6 +37,7 @@ function App() {
 
   const { data:newSongs = [] } = useFetchNewSongsQuery();
   const { data:popularSongs = [] } = useFetchPopularSongsQuery();
+
 const arr3 = newSongs!.concat(popularSongs!)
   useEffect(() => {
     dispatch(setSongListHandler(arr3!));

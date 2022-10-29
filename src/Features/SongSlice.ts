@@ -14,20 +14,22 @@ type activeSongTypes = {
   artistName: string | string[];
   songName: string;
   url: string;
+  banner?: string
+  duration? : number
 };
 
 const initialState = {
   currentsong: 0,
   activeSong: {} as unknown as activeSongTypes,
-  worldChartList: [] as unknown as WorldChartTypes[],
   albumChartList: [] as unknown as PlaylistType[],
   collection: [] as unknown as CollectionType[],
   joinedArray: [] as unknown as PlaylistType[],
+  retrivedArray : [] as unknown as PlaylistType[],
   repeat: false,
   shuffle: false,
   playing: false,
-  playAll: false,
   songEnded: false,
+  playAlbum : false
 };
 
 export const songSlice = createSlice({
@@ -39,7 +41,7 @@ export const songSlice = createSlice({
       { payload }: PayloadAction<NewSongType[]>
     ) => {
         state.joinedArray =[... payload]
-       
+        state.retrivedArray  = [...payload] //keeps track of joined array when changed
 
 
 
@@ -55,16 +57,21 @@ state.activeSong.url =  state.joinedArray[0]?.audio!;
     setAlbumHandler: (state, { payload }: PayloadAction<PlaylistType[]>) => {
       state.albumChartList = payload;
     },
-    playAll: (state) => {
-      state.playAll = !state.playAll;
-      if (state.playAll) {
+    playAll: (state, { payload }: PayloadAction<PlaylistType[]>) => {
+      state.playAlbum = true
+      if (state.playAlbum) {
+        state.joinedArray =[... payload];
+        //playall is true change to album array
+        console.log(state.joinedArray)
         state.activeSong = {
-          id: current(state.albumChartList)[0].id,
-          artistName: current(state.albumChartList)[0].artist,
-          cover: current(state.albumChartList)[0].cover,
-          songName: current(state.albumChartList)[0].title,
-          url: current(state.albumChartList)[0].audio,
+          id: state.joinedArray[0].id,
+          artistName: state.joinedArray[0].artist,
+          cover: state.joinedArray[0].cover,
+          songName: state.joinedArray[0].title,
+          url: state.joinedArray[0].audio,
         };
+        state.playing = true;
+
       }
 
       //state.activeSong
@@ -72,7 +79,6 @@ state.activeSong.url =  state.joinedArray[0]?.audio!;
 
     onSongEnded: (state, { payload }: PayloadAction<boolean>) => {
 
-console.log(!state.songEnded)
 
 if(!state.songEnded){
   state.currentsong++; //increasing current song by
@@ -87,35 +93,28 @@ if(!state.songEnded){
   }
 }
 
-      //plays immediately active song ends
-
-      // state.currentsong++; //increasing current song by 1
-      // state.activeSong = {
-      //   id: current(state.worldChartList)[state.currentsong].key,
-      //   cover: current(state.worldChartList)[state.currentsong]!?.images
-      //     ?.coverart!,
-      //   artistName: current(state.worldChartList)[state.currentsong]
-      //     ?.artists![0].alias!,
-
-      //   url: current(state.worldChartList)[state.currentsong].hub!.actions![1]!
-      //     ?.uri!,
-
-      //   songName: current(state.worldChartList)[state.currentsong]!?.title,
-      // };
     },
-    activeSongHandler: (state, { payload }) => {
-      state.activeSong = payload;
+    activeSongHandler: (state, { payload }: PayloadAction<activeSongTypes>) => {
+      state.playAlbum = false
+      state.joinedArray = state.retrivedArray 
+      //console.log()
+
+      state.activeSong = {
+        id : payload.id,
+        artistName: payload.artistName,
+        url : payload.url,
+        cover: payload.cover,
+        songName: payload.songName
+      }
       state.playing = true;
 
       //active song id
       let activeSongId = state.activeSong.id as unknown as any;
 
+      console.log(current(state.joinedArray))
       //setting the currentsong index to the index of the activesong
-
-      state.currentsong = current(state.worldChartList)
-        .map((i) => i.key)
-        .indexOf(activeSongId);
-      console.log(state.currentsong);
+state.currentsong = current(state.joinedArray).map(item =>item.id).indexOf(activeSongId)
+      console.log(state.currentsong)
     },
     playPauseHandler: (state) => {
       state.playing = !state.playing;
@@ -135,7 +134,7 @@ if(!state.songEnded){
         );
       }
 
-      state.currentsong++; //increasing current song by
+      state.currentsong ++; //increasing current song by
 
       console.log(current(state.activeSong))
       //if currentsong is less than  current(state.songList).length -1
@@ -191,9 +190,10 @@ if(!state.songEnded){
       if (filteredCollection.length === 1) {
         return console.log("item exist");
       }
+        
+
       state.collection.push(payload);
 
-      //console.log(current(state.collection))
     },
   },
 });

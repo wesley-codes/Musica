@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Banner,
   BannerInfo,
@@ -13,36 +13,49 @@ import {
 } from "./PlaylistBanner.styles";
 import lead from "../Assets/Lead.png";
 import PlayAllSVG from "../SVG/PlayAllSVG";
-import { TypedUseSelectorHook, useDispatch , useSelector} from "react-redux";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../Features/Store";
 import { addToCollection, playAll } from "../../Features/SongSlice";
 import { PauseIcon } from "../Player/Player.styles";
 import { PlaylistType } from "../../Types/LocalDataTypes";
 
 export type PlaylistBannerProps = {
-id:number
+  id: number;
 
-    cover : string
-    title : string
-    
-    files ?: PlaylistType[]
+  cover: string;
+  title: string;
+
+  files?: PlaylistType[];
 };
 
-const PlaylistBanner = ({id , cover, title , files }: PlaylistBannerProps) => {
-
+const PlaylistBanner = ({ id, cover, title, files }: PlaylistBannerProps) => {
+  const [play, setPlay] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
-//Redux state
+  //Redux state
 
-const playAllHandler = () => {
-  //playall album handler
-dispatch(playAll())
-}
+  const total_duration = files?.map((item, index) => {
+   const parts =  item.duration.toString().split(":");
+  return  +parts[0]
+  
+  }).reduce((a,b)=> a+ b)
+  
 
+  useEffect(() => {
+    if (play) {
+      console.log("play all");
+      dispatch(playAll(files!));
+    }
+  }, [play]);
 
-const addToCollectionHandler = () =>{
-dispatch(addToCollection({id, cover, title}))
+  const playAllHandler = () => {
+    setPlay(!play);
 
-}
+    //playall album handler
+  };
+
+  const addToCollectionHandler = () => {
+    dispatch(addToCollection({ id, cover, title }));
+  };
 
   return (
     <Banner>
@@ -58,13 +71,12 @@ dispatch(addToCollection({id, cover, title}))
             purus sit amet luctus venenatis
           </p>
 
-          <p> 64 songs ~ 16 hrs+ </p>
+          <p> {files?.length} songs ~ {total_duration} {total_duration! > 59 ? "hrs" : "mins" }+ </p>
         </div>
 
         <ButtonContainer>
           <PlayListButton onClick={playAllHandler}>
-        <PlayAllIcon />
-            <p>Play all </p>
+            {play ? <PauseIcon /> : <PlayAllIcon />} <p>Play all </p>
           </PlayListButton>
 
           <PlayListButton onClick={addToCollectionHandler}>

@@ -11,29 +11,29 @@ import {
   Thumbnail,
   ThumbnailContainer,
 } from "./PlaylistCard.styles";
-import Album8 from "../Assets/Album8.png";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../Features/Store";
 import { activeSongHandler } from "../../Features/SongSlice";
 
 interface PlaylistCardProps {
-  title: string;
+  id: string;
   cover: string;
+  artistName: string | string[];
+  songName: string;
   url: string;
-  banner?: string;
+  banner?: string
+  duration : number
 }
 
-const PlaylistCard = ({ title, cover, url, banner }: PlaylistCardProps) => {
+const PlaylistCard = ({ id ,cover , artistName, songName, url, banner, duration }: PlaylistCardProps) => {
 
 const dispatch = useDispatch<AppDispatch>()
 
   const selectSongHandler = () => {
     const data = {
-      title,
-      cover,
-      url,
-      banner,
+      id ,cover , artistName, songName, url, banner, duration
     };
+   // console.log(data)
 dispatch(activeSongHandler(data))
   };
 
@@ -49,7 +49,7 @@ dispatch(activeSongHandler(data))
       </Container>
 
       <SecondContainer>
-        <p>{title}</p>
+        <p>{songName}</p>
       </SecondContainer>
 
       <SongTypeBox>
@@ -57,7 +57,7 @@ dispatch(activeSongHandler(data))
       </SongTypeBox>
 
       <ThirdContainer>
-        <p>4:17</p>
+        <p>{duration}</p>
 
         <DetailIcon />
       </ThirdContainer>

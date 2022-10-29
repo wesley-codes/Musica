@@ -19,6 +19,7 @@ export type PlaylistType = {
   cover: string;
   artist: string;
   audio: string;
+  duration : number
 };
 
 
@@ -42,7 +43,7 @@ export type NewSongType ={
   id: string;
   title: string;
   cover: string;
-  duration: string
+  duration: number
   audio: string
   artist: string
 }

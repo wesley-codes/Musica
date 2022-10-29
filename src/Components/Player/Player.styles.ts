@@ -51,8 +51,10 @@ export const SecondContainer = styled.div`
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
+  padding: 0 3rem;
 
-  ${Mobile({ flex: "1", alignItems: "flex-end", justifyContent: "center" })}
+
+  ${Mobile({ flex: "1", alignItems: "flex-end", justifyContent: "center", padding:"0" })}
 `;
 
 export const IconContainer = styled.div`
@@ -80,46 +82,38 @@ export const IconBox = styled.div<any>`
     `}
 `;
 
-export const SliderContainer = styled.div`
-  width: 100%;
+export const SliderContainer = styled.div<any>`
+  width: ${props => props.track && "100%"};
+background-color: transparent;
 `;
 
 // excess height to improve interactive area / accessibility
 const height = "4px";
 const thumbHeight = 15;
 
-
 export const Slider = styled.input<any>`
+accent-color: #facd66;
+    width: ${(props)=> props.volume ? "150px" : "100%"};
+    -webkit-appearance: none; /* Override default CSS styles */
+    --seek-before-width: 0;
+    --seek-before-color: #facd66;
+    --knobby: #facd66;
+    --selectedKnobby: #facd66;
+    --bar-bg: grey;
+    outline: none;
+    border-radius: 2rem;
+    background: transparent;
+    overflow: ${(props)=> props.volume && "hidden"};
+  //for safari and browser
 
-${
-  css`
-  
-  width: 100%;
-  -webkit-appearance: none; /* Override default CSS styles */
-  --seek-before-width: 0;
-  --seek-before-color: #FACD66;
-  --knobby: #FACD66;
-  --selectedKnobby: #FACD66;
-  --bar-bg: grey;
-  outline: none;
-border-radius: 2rem;
-background: rgba(255, 255, 255, 0.04);
-
-  `
-};
-
-//for safari and browser
-
-
- 
-//safari browser
+  //safari browser
   &::-webkit-slider-runnable-track {
     -webkit-appearance: none;
 
     width: 100%;
     height: ${height};
     background: rgba(255, 255, 255, 0.04);
-  };
+  }
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -130,32 +124,30 @@ background: rgba(255, 255, 255, 0.04);
     border-radius: 100%;
     border: none;
     top: 50%;
-cursor: pointer; 
-z-index:3;
-box-sizing:border-box;
+    cursor: pointer;
+    z-index: 3;
+    box-sizing: border-box;
     transform: translateY(-50%);
-    box-shadow: #FACD66;
+    box-shadow: #facd66;
+    
     transition: background-color 150ms;
-  };
-
-
+  }
 
   //firefox browser
-  &::-moz-range-track{
+  &::-moz-range-track {
     width: 100%;
     height: ${height};
     background: var(--bar-bg);
-  };
+  }
 
   &::-moz-range-progress {
     height: ${height};
     background-color: var(--seek-before-color);
     border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  };
+    border-bottom-left-radius: 10px;
+  }
 
-
-  &::-moz-range-thumb{
+  &::-moz-range-thumb {
     position: relative;
     appearance: none;
     height: 15px;
@@ -164,22 +156,17 @@ box-sizing:border-box;
     border-radius: 100%;
     border: none;
     top: 50%;
-    cursor: pointer; 
-    z-index:3;
-    box-sizing:border-box;
+    cursor: pointer;
+    z-index: 3;
+    box-sizing: border-box;
     transform: translateY(-50%);
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.92);
     transition: background-color 150ms;
-  };
+  }
 
- 
-
-&::-moz-focus-outer{
-  border: 0
-};
-
-  
-  
+  &::-moz-focus-outer {
+    border: 0;
+  }
 
   &::-ms-thumb {
     appearance: none;
@@ -199,13 +186,7 @@ box-sizing:border-box;
     top: 0;
     margin: 0;
     box-shadow: none;
-  };
-
-
-
-
-
-
+  }
 
   ${Mobile({ display: "none" })}
 `;
