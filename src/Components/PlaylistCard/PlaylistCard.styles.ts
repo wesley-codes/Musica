@@ -32,7 +32,7 @@ export const Container = styled.div`
 
 export const ThumbnailContainer = styled.div<any>`
   position: relative;
-  ${Mobile({width:"100%"})}
+  ${Mobile({})}
 `;
 
 export const Thumbnail = styled.img`
@@ -40,7 +40,7 @@ export const Thumbnail = styled.img`
   height: 50px;
   border-radius: 1rem;
   
-  ${Mobile({width:"100%"})}
+  ${Mobile({})}
 
 `;
 
